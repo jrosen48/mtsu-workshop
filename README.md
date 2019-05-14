@@ -25,7 +25,7 @@ To download R Studio:
 
 ## Slides
 
-The (in-development) slides will be hosted here: https://jrosen48.github.io/MSU-workshop-2019/#1
+The (in-development) slides will be hosted here: https://jrosen48.github.io/MSU-workshop-2019/
 
 ## Thank you
 
