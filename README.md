@@ -27,5 +27,15 @@ To download R Studio:
 
 The (in-development) slides will be hosted here: https://jrosen48.github.io/MSU-workshop-2019/#1
 
+## Thank you
 
+Thank you to [Emily Bovee](https://github.com/emilybovee)for facilitating the online portion of this workshop.
 
+## Acknowledgments
+
+Parts of the content for this workshop are adapted from:
+
+- The [*Data Science in Education* book](https://github.com/data-edu/data-science-in-education)
+- An American Educational Research Association 2019 annual meeting [workshop on *Reproducible and transparent research with R*](https://github.com/ResearchTransparency/rr_aera19)
+
+Parts of the content for this workshop are inspired from content associated with the [Data Science Specialization for UO COE](https://github.com/uo-datasci-specialization) (led by [Daniel Anderson](https://github.com/datalorax])
