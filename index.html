@@ -4,7 +4,7 @@
     <title>Won’t you be my neighboR?</title>
     <meta charset="utf-8">
     <meta name="author" content="Joshua Rosenberg" />
-    <meta name="date" content="2019-05-14" />
+    <meta name="date" content="2019-05-15" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 # Won’t you be my neighboR?
 ## An introduction to R for data science in education
 ### Joshua Rosenberg
-### 2019-05-14
+### 2019-05-15
 
 ---
 
@@ -35,6 +35,12 @@ class: center, middle, inverse, title-slide
 ]
 
 &lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center, middle
+
+# Agenda
 
 ---
 
@@ -61,8 +67,11 @@ class: center, middle, inverse, title-slide
 
 ---
 
+class: inverse, center, middle
+
 # Getting started with R Studio
 
+---
 
 ### To download R Studio:
 
@@ -106,28 +115,13 @@ You can also navigate to the Packages pane, and then click "Install", which will
 
 ---
 
+# Using packages
+
 *After* the package is installed, it must be loaded into your R Studio session using `library()`:
 
 
 ```r
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
 ```
 
 We only have to install a package once, but to use it, we have to load it each time we start a new R session.
@@ -193,7 +187,64 @@ filter(dat, letter == "A") # using dplyr::filter
 
 ---
 
+class: inverse, center, middle
+
 # Computer programming basics
+
+---
+
+# Objects and variables
+
+
+```r
+my_object &lt;- 1
+my_other_object &lt;- c(1:10)
+```
+
+Reading in a CSV and assigning it to an object
+
+
+```r
+my_df &lt;- read_csv("example-data.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   mpg = col_double(),
+##   cyl = col_double(),
+##   disp = col_double(),
+##   hp = col_double(),
+##   drat = col_double(),
+##   wt = col_double(),
+##   qsec = col_double(),
+##   vs = col_double(),
+##   am = col_double(),
+##   gear = col_double(),
+##   carb = col_double()
+## )
+```
+
+```r
+my_df
+```
+
+```
+## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows
+```
 
 ---
 
@@ -214,11 +265,11 @@ data.frame(var1 = c("a", "b", "c"),
 ## 3    c    5
 ```
 
-
 - Tibble
 
 
 ```r
+library(tidyverse)
 tibble(var1 = c("a", "b", "c"),
        var2 = c(4, 2, 5))
 ```
@@ -234,60 +285,203 @@ tibble(var1 = c("a", "b", "c"),
 
 ---
 
+# Data structures
+
+
+```r
+vec1 = c("a", "b", "c")
+vec1 
+```
+
+```
+## [1] "a" "b" "c"
+```
+
+
+```r
+vec2 = c(4, 2, 5)
+vec2
+```
+
+```
+## [1] 4 2 5
+```
+
+
+```r
+library(tibble)
+tibble(var1 = vec1,
+       var2 = vec2)
+```
+
+```
+## # A tibble: 3 x 2
+##   var1   var2
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a         4
+## 2 b         2
+## 3 c         5
+```
+
 # Conditional logic 
 
 - `ifelse()`
 
 
 ```r
-vec &lt;- runif(10) # generates random number between 0 and 1
-ifelse(vec &gt;= .5, "greater", "lesser")
+vec1 &lt;- runif(10) # generates random number between 0 and 1
+d1 &lt;- tibble(var1 = vec1)
+
+d1 %&gt;% 
+  mutate(var2 = ifelse(vec1 &gt;= .5, "greater", "lesser"))
 ```
 
 ```
-##  [1] "greater" "lesser"  "lesser"  "greater" "lesser"  "greater" "lesser" 
-##  [8] "greater" "greater" "lesser"
+## # A tibble: 10 x 2
+##      var1 var2   
+##     &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.0621 lesser 
+##  2 0.443  lesser 
+##  3 0.688  greater
+##  4 0.715  greater
+##  5 0.0237 lesser 
+##  6 0.879  greater
+##  7 0.594  greater
+##  8 0.459  lesser 
+##  9 0.491  lesser 
+## 10 0.745  greater
 ```
 
 - `dplyr::case_when()`
 
 
 ```r
-d1 &lt;- tibble(var1 &lt;- runif(10))
 d1 %&gt;% 
   mutate(var2 = case_when(
-    vec &gt;= .5 ~ "greater",
-    vec &lt; .5 ~ "lesser"
+    var1 &gt;= .75 ~ "a lot",
+    var1 &gt;= .5 ~ "greater",
+    var1 &lt; .5 ~ "lesser",
+    var1 &lt;= .25 ~ "very little" 
   ))
 ```
 
 ```
 ## # A tibble: 10 x 2
-##    `var1 &lt;- runif(10)` var2   
-##                  &lt;dbl&gt; &lt;chr&gt;  
-##  1              0.198  greater
-##  2              0.877  lesser 
-##  3              0.220  lesser 
-##  4              0.163  greater
-##  5              0.569  lesser 
-##  6              0.287  greater
-##  7              0.398  lesser 
-##  8              0.0919 greater
-##  9              0.447  greater
-## 10              0.753  lesser
+##      var1 var2   
+##     &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.0621 lesser 
+##  2 0.443  lesser 
+##  3 0.688  greater
+##  4 0.715  greater
+##  5 0.0237 lesser 
+##  6 0.879  a lot  
+##  7 0.594  greater
+##  8 0.459  lesser 
+##  9 0.491  lesser 
+## 10 0.745  greater
 ```
 
 ---
 
 # Functions
 
+
+```r
+mean(c(1, 2, 3))
+```
+
+```
+## [1] 2
+```
+
+
+```r
+mean(c(1, 2, 3, NA))
+```
+
+```
+## [1] NA
+```
+
+
+```r
+?mean
+```
+
+
+```r
+mean(c(1, 2, 3, NA), na.rm = TRUE)
+```
+
+```
+## [1] 2
+```
+
+---
+
+# Functions
+
+
+```r
+library(tidyverse)
+read_directory &lt;- function(directory) {
+  map_df(list.files(directory), read_csv)
+}
+
+d &lt;- read_directory("data")
+```
+
 ---
 
 # Iteration
 
+
+```r
+random_numbers &lt;- rnorm(n = 10, mean = 0)
+random_numbers
+```
+
+```
+##  [1] -1.7638022  0.5809138  0.4351354 -0.5468024  0.5658284  0.7096969
+##  [7] -0.1902868  1.0643727 -0.2579108  0.9129859
+```
+
+```r
+mean(random_numbers)
+```
+
+```
+## [1] 0.1510131
+```
+
+```r
+sd(random_numbers)
+```
+
+```
+## [1] 0.8564615
+```
+
+
+```r
+library(tidyverse)
+1:10 %&gt;%
+  map(~ rnorm(n = 10, mean = .x)) %&gt;%
+  map_dbl(mean)
+```
+
+```
+##  [1]  1.366117  2.174400  3.058059  3.954706  4.398393  5.778394  6.969274
+##  [8]  8.120434  9.317898 10.028843
+```
+
+
 ---
 
+class: inverse, center, middle
 # Visualizing data
+
+---
 
 ---
 
@@ -306,9 +500,10 @@ d1 %&gt;%
 # Relationships between three variables
 
 ---
-
+class: inverse, center, middle
 # Processing data
 
+---
 
 ### Track Two: Welcome to the Tidyverse
 
@@ -329,7 +524,6 @@ library(tidyverse)
 ```
 
 **For more information on tidy data, check out [Hadley Wickhams's Tidy Data paper](http://vita.had.co.nz/papers/tidy-data.html).**
-**For more information on the Tidyverse, check out DataCamp's [Getting Started with the Tidyverse tutorial]( https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r).**
 
 ## Loading Data from Various Sources
 
@@ -558,8 +752,6 @@ That will save a CSV file entitled `student-responses.csv` in the working direct
 
 We will detail the functions used to read every file in a folder (or, to write files to a folder).
 
-**For more information on installing R and R Studio, check out DataCamp's [R Data Import Tutorial](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu).**
-
 ## Processing Data
 
 Now that we have loaded `student_responses` into an object, we can process it. This section highlights some common data processing functions. 
@@ -653,6 +845,8 @@ While this may seem like a dramatic step - never saving your workspace - it is t
 
 ---
 
+class: inverse, center, middle
+
 # Modeling data
 
 ---
@@ -669,6 +863,7 @@ While this may seem like a dramatic step - never saving your workspace - it is t
 
 ---
 
+class: inverse, center, middle
 # Creating reproducible reports
 
 ---

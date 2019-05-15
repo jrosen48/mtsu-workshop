@@ -17,6 +17,7 @@ output:
 options(htmltools.dir.version = FALSE)
 
 library(knitr)
+library(tidyverse)
 ```
 
 # Who am I?
@@ -32,6 +33,12 @@ library(knitr)
 ```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
 include_graphics("img/kr-joro.jpg")
 ```
+
+---
+
+class: inverse, center, middle
+
+# Agenda
 
 ---
 
@@ -58,8 +65,11 @@ include_graphics("img/kr-joro.jpg")
 
 ---
 
+class: inverse, center, middle
+
 # Getting started with R Studio
 
+---
 
 ### To download R Studio:
 
@@ -101,6 +111,8 @@ install.packages("dplyr", repos = "http://cran.us.r-project.org")
 You can also navigate to the Packages pane, and then click "Install", which will work the same as the line of code above. This is a way to install a package using code or part of the R Studio interface. Usually, writing code is a bit quicker, but using the interface can be very useful and complimentary to use of code. 
 
 ---
+
+# Using packages
 
 *After* the package is installed, it must be loaded into your R Studio session using `library()`:
 
@@ -150,7 +162,25 @@ filter(dat, letter == "A") # using dplyr::filter
 
 ---
 
+class: inverse, center, middle
+
 # Computer programming basics
+
+---
+
+# Objects and variables
+
+```{r}
+my_object <- 1
+my_other_object <- c(1:10)
+```
+
+Reading in a CSV and assigning it to an object
+
+```{r}
+my_df <- read_csv("example-data.csv")
+my_df
+```
 
 ---
 
@@ -163,33 +193,55 @@ data.frame(var1 = c("a", "b", "c"),
            var2 = c(4, 2, 5))
 ```
 
-
 - Tibble
 
 ```{r}
+library(tidyverse)
 tibble(var1 = c("a", "b", "c"),
        var2 = c(4, 2, 5))
 ```
 
 ---
 
+# Data structures
+
+```{r}
+vec1 = c("a", "b", "c")
+vec1 
+```
+
+```{r}
+vec2 = c(4, 2, 5)
+vec2
+```
+
+```{r}
+library(tibble)
+tibble(var1 = vec1,
+       var2 = vec2)
+```
+
 # Conditional logic 
 
 - `ifelse()`
 
 ```{r}
-vec <- runif(10) # generates random number between 0 and 1
-ifelse(vec >= .5, "greater", "lesser")
+vec1 <- runif(10) # generates random number between 0 and 1
+d1 <- tibble(var1 = vec1)
+
+d1 %>% 
+  mutate(var2 = ifelse(vec1 >= .5, "greater", "lesser"))
 ```
 
 - `dplyr::case_when()`
 
 ```{r}
-d1 <- tibble(var1 <- runif(10))
 d1 %>% 
   mutate(var2 = case_when(
-    vec >= .5 ~ "greater",
-    vec < .5 ~ "lesser"
+    var1 >= .75 ~ "a lot",
+    var1 >= .5 ~ "greater",
+    var1 < .5 ~ "lesser",
+    var1 <= .25 ~ "very little" 
   ))
 ```
 
@@ -197,13 +249,60 @@ d1 %>%
 
 # Functions
 
+```{r}
+mean(c(1, 2, 3))
+```
+
+```{r}
+mean(c(1, 2, 3, NA))
+```
+
+```{r, eval = FALSE}
+?mean
+```
+
+```{r}
+mean(c(1, 2, 3, NA), na.rm = TRUE)
+```
+
+---
+
+# Functions
+
+```{r, eval = FALSE}
+library(tidyverse)
+read_directory <- function(directory) {
+  map_df(list.files(directory), read_csv)
+}
+
+d <- read_directory("data")
+```
+
 ---
 
 # Iteration
 
+```{r}
+random_numbers <- rnorm(n = 10, mean = 0)
+random_numbers
+mean(random_numbers)
+sd(random_numbers)
+```
+
+```{r}
+library(tidyverse)
+1:10 %>%
+  map(~ rnorm(n = 10, mean = .x)) %>%
+  map_dbl(mean)
+```
+
+
 ---
 
+class: inverse, center, middle
 # Visualizing data
+
+---
 
 ---
 
@@ -222,9 +321,10 @@ d1 %>%
 # Relationships between three variables
 
 ---
-
+class: inverse, center, middle
 # Processing data
 
+---
 
 ### Track Two: Welcome to the Tidyverse
 
@@ -243,7 +343,6 @@ library(tidyverse)
 ```
 
 **For more information on tidy data, check out [Hadley Wickhams's Tidy Data paper](http://vita.had.co.nz/papers/tidy-data.html).**
-**For more information on the Tidyverse, check out DataCamp's [Getting Started with the Tidyverse tutorial]( https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r).**
 
 ## Loading Data from Various Sources
 
@@ -423,8 +522,6 @@ That will save a CSV file entitled `student-responses.csv` in the working direct
 
 We will detail the functions used to read every file in a folder (or, to write files to a folder).
 
-**For more information on installing R and R Studio, check out DataCamp's [R Data Import Tutorial](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu).**
-
 ## Processing Data
 
 Now that we have loaded `student_responses` into an object, we can process it. This section highlights some common data processing functions. 
@@ -515,6 +612,8 @@ While this may seem like a dramatic step - never saving your workspace - it is t
 
 ---
 
+class: inverse, center, middle
+
 # Modeling data
 
 ---
@@ -531,6 +630,7 @@ While this may seem like a dramatic step - never saving your workspace - it is t
 
 ---
 
+class: inverse, center, middle
 # Creating reproducible reports
 
 ---
