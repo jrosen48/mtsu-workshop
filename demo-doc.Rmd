@@ -7,9 +7,25 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Demo doc (part 1): Try it out!
+
+Let's first load the tidyverse suite of packages.
+
+If you haven't already, make sure to install the tidyverse, first.
+
+*You can skip this code "chunk" if you already have the tidyverse installed; you only need to do this once*
+
+```{r}
+install.packages("tidyverse")
+```
+
+Be sure to run this next line to load the tidyverse. You do this each time you open R.
+
 ```{r}
 library(tidyverse)
 ```
+
+Here is the data set we will use:
 
 ```{r}
 gss_cat
@@ -17,14 +33,16 @@ gss_cat
 
 # Select
 
+Let's select only a few variables.
+
 ```{r}
 gss_cat %>% 
   select(year, marital, tvhours)
 ```
 
-Try it out! 
+**Try it out!**
 
-Select three *different* variables
+Now, select three *different* variables, and run the code chunk to view the result.
 
 ```{r}
 gss_cat %>% 
@@ -38,9 +56,11 @@ gss_cat %>%
   filter(age > 30)
 ```
 
-Try it out!
+**Try it out!**
 
 Filter to include only those individuals who watch a lot of TV - more than 10 hours per *day*!
+
+Be sure to run the result to see whether it did what you think it should do!
 
 ```{r}
 gss_cat %>% 
@@ -49,4 +69,9 @@ gss_cat %>%
 
 # Mutate
 
+Let's create a new variable for those 60 years of age or older.
+
 ```{r}
+gss_cat %>% 
+  mutate(potential_senior = if_else(age >= 60, TRUE, FALSE))
+```

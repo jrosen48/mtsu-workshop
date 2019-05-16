@@ -4,7 +4,7 @@
     <title>Won’t you be my neighboR?</title>
     <meta charset="utf-8">
     <meta name="author" content="Joshua Rosenberg" />
-    <meta name="date" content="2019-05-15" />
+    <meta name="date" content="2019-05-16" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -17,24 +17,40 @@ class: center, middle, inverse, title-slide
 # Won’t you be my neighboR?
 ## An introduction to R for data science in education
 ### Joshua Rosenberg
-### 2019-05-15
+### 2019-05-16
 
 ---
 
 
 
 
-# Who am I?
+# #whoami1
 
 .pull-left[
-* Assistant Professor: STEM Education, University of Tennessee, Knoxville
+* Dr. Joshua Rosenberg
+* Assistant Professor, STEM Education, University of Tennessee, Knoxville
 * Dad (one-year-old toddler!)
 * Primary areas of interest
-+ Data science in education (network analytic methods, experience sampling method, computational grounded theory)
-+ Data science education (integrating data science and science education)
+  * Data science in education
+  * Data science education
 ]
 
 &lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# #whoami2
+
+.pull-left[
+* Dr. Emily Bovee
+* Director of Educational Development and Assessment: Marquette University School of Dentistry
+* Cat mom
+* Primary areas of interest
+  * Understanding student motivation in higher education and professional education
+  * Data science education 
+]
+
+&lt;img src="img/ebv.jpg" width="350px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -48,12 +64,13 @@ class: inverse, center, middle
 
 1. Why learn R?
 1. Getting started with R Studio
-1. Visualizing data
+1. Computer science foundations
 1. Processing data
+1. Loading data
+1. Visualizing data
+1. Modeling data 
 1. Learning and doing more with R
-1. Modeling data (time permitting)
-1. Computer programming basics (time permitting)
-1. Creating reproducible reports (time permitting)
+1. Questions and sundry tools (time permitting)
 
 ---
 
@@ -64,7 +81,7 @@ class: inverse, center, middle
 * It is a programming language and so is quite flexible
 * There is a great, inclusive community of users and developers (and teachers)
 * It is cross-platform, open-source, and freely-available
-
+* It can h
 ---
 
 class: inverse, center, middle
@@ -73,24 +90,31 @@ class: inverse, center, middle
 
 ---
 
-# To download R Studio:
+# Installations
 
-- Visit this page to download R studio: [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/)
+To download R:
+- Visit this page to download R: https://cran.r-project.org/
 - Find your operating system (Mac, Windows, or Linux)
 - Download the 'latest release' on the page for your operating system and download and install the application
 
-If you do have issues, consider this [page](https://datacarpentry.org/R-ecology-lesson/), and then reach out for help. One good place to start is the [R Studio Community](https://community.rstudio.com/) is a great place to start.
+To download R Studio:
+- Visit this page to download R studio: https://www.rstudio.com/products/rstudio/download/
+- Find your operating system (Mac, Windows, or Linux)
+- Download the 'latest release' on the page for your operating system and download and install the application
 
-### Check that it worked
+## Check that it worked
 
 Open R Studio.  Find the console window and type in `2 + 2`. If what you can guess is returned (hint: it's what you expect!), then R Studio *and* R both work.
 
 ---
+
 # Creating Projects
 
 Before proceeding, we're going to take a few steps to set ourselves to make the analysis easier; namely, through the use of Projects, an R Studio-specific organizational tool. 
 
 To create a project, in R Studio, navigate to "File" and then "New Directory". Then, click "New Project".
+
+Names should be short and easy-to-remember but also informative.
 
 ---
 
@@ -104,10 +128,12 @@ To download a package, you must call `install.packages()`:
 
 
 ```r
-install.packages("dplyr", repos = "http://cran.us.r-project.org")
+install.packages("dplyr")
 ```
 
-You can also navigate to the Packages pane, and then click "Install", which will work the same as the line of code above. This is a way to install a package using code or part of the R Studio interface. Usually, writing code is a bit quicker, but using the interface can be very useful and complimentary to use of code. 
+You can also navigate to the Packages pane, and then click "Install", which will work the same as the line of code above. This is a way to install a package using code or part of the R Studio interface. 
+
+Usually, writing code is a bit quicker, but using the interface can be very useful and complimentary to use of code. 
 
 ---
 
@@ -122,14 +148,16 @@ library(dplyr)
 
 We only have to install a package once, but to use it, we have to load it each time we start a new R session.
 
-&gt; a package is a like a book, a library is like a library; you use library() to check a package out of the library
+&gt; A package is a like a book, a library is like a library; you use library() to check a package out of the library
 &gt; - Hadley Wickham, Chief Scientist, R Studio
 
 ---
 
 # Running Functions from Packages
 
-Once you have loaded the package in your session, you can run the functions that are contained within that package. To find a list of all those functions, you can run this in the R Studio console:
+Once you have loaded the package in your session, you can run the functions that are contained within that package. 
+
+To find a list of all those functions, you can run this in the R Studio console:
 
 
 ```r
@@ -142,12 +170,23 @@ The documentation should tell you what the function does, what arguments (i.e., 
 
 # Vignettes
 
+Vignettes are long-form documentation (and tutorials) that can provide a helpful introduction to a package.
+
+Run `vignette()` in order to view *all* of the vignettes available for a package:
+
 
 ```r
 vignette(package = "dplyr")
+```
+
+Then, you can load a specific vignette.
+
+
+```r
 vignette("dplyr", package = "dplyr")
 ```
 
+These are also available through CRAN (i.e., https://cran.r-project.org/web/packages/dplyr/index.html)
 ---
 
 # Using a specific function
@@ -156,7 +195,7 @@ If you know the specific function that you want to look up, you can run this in 
 
 
 ```r
-??dplyr::filter
+?dplyr::filter
 ```
 
 Once you know what you want to do with the function, you can run it in your code:
@@ -164,51 +203,34 @@ Once you know what you want to do with the function, you can run it in your code
 
 ```r
 dat &lt;- # example data frame
-  data.frame(stringsAsFactors=FALSE,
-             letter = c("A", "A", "A", "B", "B"),
-             number = c(1L, 2L, 3L, 4L, 5L))
+  tibble(letter = c("A", "A", "A", "B", "B"),
+         number = c(1L, 2L, 3L, 4L, 5L))
 
-dat
+filter(dat, letter == "A")
 ```
 
 ```
+## # A tibble: 3 x 2
 ##   letter number
-## 1      A      1
-## 2      A      2
-## 3      A      3
-## 4      B      4
-## 5      B      5
-```
-
-```r
-filter(dat, letter == "A") # using dplyr::filter
-```
-
-```
-##   letter number
-## 1      A      1
-## 2      A      2
-## 3      A      3
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 A           1
+## 2 A           2
+## 3 A           3
 ```
 
 ---
-
 
 # Configuring R Studio
 
-One important consideration is whether to save your workspace when you close R Studio. By default, R Studio saves all of the objects in your environment. This means that any data that you have loaded--or new data or objects that you have created, such as by merging two data sets together or creating a plot--will, by default, still exist when you open R Studio next. In general, this is not ideal, because it means that you may have taken steps interactively that are not documented your code. This means that when you share your code, or re-run it from the start, it may not work. An easy way to change this is to tell R Studio to start from scratch (in terms of your workspace) each time you open it. You can do that by changing the dropdown menu pointed out in the image below to "Never".
+By default, R Studio saves all of the objects in your environment. In general, this is not ideal, because it means that you may have taken steps interactively that are not documented your code.
 
-![optional caption text](images/save-workspace-reminder.jpg)
----
-
-class: inverse, center, middle
-# Processing data
+&lt;img src="img/save-workspace-reminder.jpg" width="425px" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# The Tidyverse
+# The tidyverse
 
-The Tidyverse is a set of packages for data manipulation, exploration, and visualization using the design philosophy of 'tidy' data. Tidy data has a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.
+The tidyverse is a set of packages for data manipulation, exploration, and visualization using the design philosophy of 'tidy' data. Tidy data has a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.
 
 The packages contained in the Tidyverse provide useful functions that augment base R functionality.
 
@@ -224,379 +246,11 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
-**For more information on tidy data, check out [Hadley Wickhams's Tidy Data paper](http://vita.had.co.nz/papers/tidy-data.html).**
----
-
-# Loading Data from Various Sources
-
-### Saving a File from the Web
-
-You'll need to copy this URL:
-
-`https://goo.gl/bUeMhV`
-
-Here's what it resolves to (it's a CSV file):
-
-`https://raw.githubusercontent.com/data-edu/data-science-in-education/master/data/pisaUSA15/stu-quest.csv`
-
-
-```r
-student_responses_url &lt;-
-  "https://goo.gl/bUeMhV"
-
-student_responses_file_name &lt;-
-  paste0(getwd(), "./data/student-responses-data.csv")
-
-download.file(
-  url = student_responses_url,
-  destfile = student_responses_file_name)
-```
-
-It may take a few seconds to download as it's around 20 MB.
-
-The process above involves many core data science ideas and ideas from programming/coding. We will walk through them step-by-step.
-
----
-
-# Step 1
-
-1. The *character string* `"https://goo.gl/wPmujv"` is being saved to an *object* called `student_responses_url`.
-
-
-```r
-student_responses_url &lt;-
-  "https://goo.gl/bUeMhV"
-```
-
----
-
-# Step 2
-
-2. We concatenate your working directory file path to the desired file name for the CSV using a *function* called `paste0`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
-
-
-```r
-student_responses_file_name &lt;-
-  paste0(getwd(), "./data/student-responses-data.csv")
-```
-
----
-
-# Step 3
-
-3. The `student_responses_url` *object* is passed to the `url` argument of the *function* called `download.file()` along with `student_responses_file_name`, which is passed to the `destfile` argument.
-
-In short, the `download.file()` function needs to know
-- where the file is coming from (which you tell it through the `url`) argument and
-- where the file will be saved (which you tell it through the `destfile` argument).
-
-
-```r
-download.file(
-  url = student_responses_url,
-  destfile = student_responses_file_name)
-```
-
-Understanding how R is working in these terms can be helpful for troubleshooting and reaching out for help. It also helps you to use functions that you have never used before because you are familiar with how some functions work.
-
----
-
-# Loading a CSV File
-
-Okay, we're ready to go. The easiest way to read a CSV file is with the function `read_csv()` from the package `readr`, which is contained within the Tidyverse.
-
----
-
-# Loading the file
-
-Let's load the tidyverse library:
-
-
-```r
-library(tidyverse) # so tidyverse packages can be used for analysis
-```
-
-After loading the tidyverse packages, we can now load a file. We are going to call the data `student_responses`:
-
-
-```r
-student_responses &lt;-
-  read_csv("./data/student-responses-data.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   .default = col_double(),
-##   CNT = col_character(),
-##   CYC = col_character(),
-##   NatCen = col_character(),
-##   STRATUM = col_character(),
-##   Option_Read = col_character(),
-##   Option_Math = col_character(),
-##   ST011D17TA = col_character(),
-##   ST011D18TA = col_character(),
-##   ST011D19TA = col_character(),
-##   ST124Q01TA = col_logical(),
-##   IC001Q01TA = col_logical(),
-##   IC001Q02TA = col_logical(),
-##   IC001Q03TA = col_logical(),
-##   IC001Q04TA = col_logical(),
-##   IC001Q05TA = col_logical(),
-##   IC001Q06TA = col_logical(),
-##   IC001Q07TA = col_logical(),
-##   IC001Q08TA = col_logical(),
-##   IC001Q09TA = col_logical(),
-##   IC001Q10TA = col_logical()
-##   # ... with 420 more columns
-## )
-```
-
-```
-## See spec(...) for full column specifications.
-```
-
-Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
-
-
-```r
-glimpse(student_responses)
-```
-
----
-
-# Loading Excel files
-
-
-```r
-install.packages("readxl")
-```
-
-
-```r
-library(readxl)
-```
-
-We can then use the function `read_excel()` in the same way as `read_csv()`, where "path/to/file.xlsx" is where an Excel file you want to load is located (note that this code is not run here):
-
-
-```r
-my_data &lt;-
-  read_excel("path/to/file.xlsx")
-```
-
----
-
-# Loading SAV files
-
-
-```r
-install.packages("haven")
-```
-
-
-```r
-library(haven)
-my_data &lt;-
-  read_sav("path/to/file.xlsx")
-```
-
----
-
-# Saving Files
-
-Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
-
-
-```r
-write_csv(student_responses, "student-responses.csv")
-```
-
-That will save a CSV file entitled `student-responses.csv` in the working directory. If you want to save it to another directory, simply add the file path to the file, i.e. `path/to/student-responses.csv`. To save a file for SPSS, load the haven package and use `write_sav()`. There is not a function to save an Excel file, but you can save as a CSV and directly load it in Excel.
-
----
-class: inverse, center, middle
-# Processing Data
----
-
-# The pipe: %&gt;% 
-
-We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%&gt;%`. It lets you *compose* functions. It does this by passing the output of one function to the next. A handy shortcut for writing out `%&gt;%` is Command + Shift + M.
-
-Here's an example. Let's say that we want to select a few variables from the `student_responses` dataset and save those variables into a new object, `student_mot_vars`. Here's how we would do that using `dplyr::select()`.
-
-
-```r
-student_mot_vars &lt;- # save object student_mot_vars by...
-  student_responses %&gt;% # using dataframe student_responses
-  select(SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
-```
-
----
-
-# Saving the results
-
-Note that we saved the output from the `select()` function to `student_mot_vars` but we could also save it back to `student_responses`, which would simply overwrite the original data frame (the following code is not run here):
-
-
-```r
-student_responses &lt;- # save object student_responses by...
-  student_responses %&gt;% # using dataframe student_responses
-  select(student_responses, SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
-```
-
----
-
-# Renaming
-
-We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work.
-
-
-```r
-student_mot_vars &lt;- # save object student_mot_vars by...
-  student_responses %&gt;% # using dataframe student_responses
-  select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
-         student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
-         student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
-         student_epistemic_beliefs = EPIST, # selecting variable EPIST and renaming to student_epistemic_beliefs
-         student_instrumental_motivation = INSTSCIE # selecting variable INSTSCIE and renaming to student_instrumental_motivation
-  )
-```
-
----
-
-# Processing data (part 1 of 4)
-
-* `select()`
-* `rename()`
-* `filter()`
-* `mutate()`
-
----
-
-# Processing data (part 2 of 4)
-
-* `group_by()`
-* `count()`
-* `summarize()`
-
----
-
-# Processing data (part 3 of 4)
-
-* `left_join()`
-* `right_join()`
-* `semi_join()`
-* `anti_join()`
-
----
-
-# Processing data (part 4 of 4)
-
-* `gather()`
-* `spread()`
-
 ---
 
 class: inverse, center, middle
 
-# Modeling data
-
----
-
-# Linear models
-
----
-
-# Multi-level models
-
----
-
-# Latent variable models
-
----
-
-class: inverse, center, middle
-# Creating reproducible reports
-
----
-
-# R Markdown
-
----
-
-# APA Tables
-
----
-
-# Papaja
-
----
-
-# Redoc
-
----
-
-
-class: inverse, center, middle
-
-# Computer programming basics
-
----
-
-# Objects and variables
-
-
-```r
-my_object &lt;- 1
-my_other_object &lt;- c(1:10)
-```
-
-Reading in a CSV and assigning it to an object
-
-
-```r
-my_df &lt;- read_csv("example-data.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   mpg = col_double(),
-##   cyl = col_double(),
-##   disp = col_double(),
-##   hp = col_double(),
-##   drat = col_double(),
-##   wt = col_double(),
-##   qsec = col_double(),
-##   vs = col_double(),
-##   am = col_double(),
-##   gear = col_double(),
-##   carb = col_double()
-## )
-```
-
-```r
-my_df
-```
-
-```
-## # A tibble: 32 x 11
-##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-## # … with 22 more rows
-```
-
+# Computer science foundations
 ---
 
 # Data structures
@@ -660,7 +314,6 @@ vec2
 
 
 ```r
-library(tibble)
 tibble(var1 = vec1,
        var2 = vec2)
 ```
@@ -673,6 +326,8 @@ tibble(var1 = vec1,
 ## 2 b         2
 ## 3 c         5
 ```
+
+---
 
 # Conditional logic 
 
@@ -691,17 +346,21 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##      var1 var2   
 ##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.611  greater
-##  2 0.897  greater
-##  3 0.547  greater
-##  4 0.757  greater
-##  5 0.0941 lesser 
-##  6 0.0623 lesser 
-##  7 0.653  greater
-##  8 0.780  greater
-##  9 0.875  greater
-## 10 0.438  lesser
+##  1 0.0176 lesser 
+##  2 0.585  greater
+##  3 0.437  lesser 
+##  4 0.660  greater
+##  5 0.454  lesser 
+##  6 0.373  lesser 
+##  7 0.822  greater
+##  8 0.550  greater
+##  9 0.633  greater
+## 10 0.504  greater
 ```
+
+---
+
+# Conditional logic 
 
 - `dplyr::case_when()`
 
@@ -720,111 +379,540 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##      var1 var2   
 ##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.611  greater
-##  2 0.897  a lot  
-##  3 0.547  greater
-##  4 0.757  a lot  
-##  5 0.0941 lesser 
-##  6 0.0623 lesser 
-##  7 0.653  greater
-##  8 0.780  a lot  
-##  9 0.875  a lot  
-## 10 0.438  lesser
+##  1 0.0176 lesser 
+##  2 0.585  greater
+##  3 0.437  lesser 
+##  4 0.660  greater
+##  5 0.454  lesser 
+##  6 0.373  lesser 
+##  7 0.822  a lot  
+##  8 0.550  greater
+##  9 0.633  greater
+## 10 0.504  greater
+```
+
+---
+# Objects, functions, directories, and data structures
+
+Here's a short URL: `https://goo.gl/bUeMhV`
+
+This is what it resolves to (it's a CSV file): `https://raw.githubusercontent.com/data-edu/data-science-in-education/master/data/pisaUSA15/stu-quest.csv`
+
+This chunk of code will save that file to a data directory in our working environment.
+
+
+```r
+student_responses_url &lt;-
+  "https://goo.gl/bUeMhV"
+
+student_responses_file_name &lt;-
+  paste0(getwd(), "/data/student-responses-data.csv")
+
+download.file(
+  url = student_responses_url,
+  destfile = student_responses_file_name)
 ```
 
 ---
 
-# Functions
+# Step 1
+
+1. The *character string* `"https://goo.gl/wPmujv"` is being saved to an *object* called `student_responses_url`.
 
 
 ```r
-mean(c(1, 2, 3))
-```
-
-```
-## [1] 2
-```
-
-
-```r
-mean(c(1, 2, 3, NA))
-```
-
-```
-## [1] NA
-```
-
-
-```r
-?mean
-```
-
-
-```r
-mean(c(1, 2, 3, NA), na.rm = TRUE)
-```
-
-```
-## [1] 2
+student_responses_url &lt;-
+  "https://goo.gl/bUeMhV"
 ```
 
 ---
 
-# Functions
+# Step 2
+
+2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `paste0`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
 
 
 ```r
-library(tidyverse)
-read_directory &lt;- function(directory) {
-  map_df(list.files(directory), read_csv)
-}
-
-d &lt;- read_directory("data")
+student_responses_file_name &lt;-
+  str_c(getwd(), "./data/student-responses-data.csv")
 ```
 
 ---
 
-# Iteration
+# Step 3
+
+3. The `student_responses_url` *object* is passed to the `url` argument of the *function* called `download.file()` along with `student_responses_file_name`, which is passed to the `destfile` argument.
+
+In short, the `download.file()` function needs to know
+- where the file is coming from (which you tell it through the `url`) argument and
+- where the file will be saved (which you tell it through the `destfile` argument).
 
 
 ```r
-random_numbers &lt;- rnorm(n = 10, mean = 0)
-random_numbers
+download.file(
+  url = student_responses_url,
+  destfile = student_responses_file_name)
 ```
 
-```
-##  [1] -0.4094421  0.7409047 -0.7815615 -1.2228265  0.3718356 -0.4712203
-##  [7] -1.2964619 -1.1559100  1.6604990 -0.4710273
-```
+---
+class: inverse, center, middle
+# Processing Data
+---
 
-```r
-mean(random_numbers)
-```
+# The pipe: %&gt;% 
 
-```
-## [1] -0.303521
-```
-
-```r
-sd(random_numbers)
-```
-
-```
-## [1] 0.9578825
-```
+First, let's load the data we downloaded in the last step.
 
 
 ```r
-library(tidyverse)
-1:10 %&gt;%
-  map(~ rnorm(n = 10, mean = .x)) %&gt;%
-  map_dbl(mean)
+student_responses &lt;- read_csv("data/student-responses-data.csv")
+```
+
+We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%&gt;%`. It lets you *compose* functions. It does this by passing the output of one function to the next.
+
+Select reduces the number of *columns* of a dataset.
+
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
+  select(SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
+
+student_mot_vars
+```
+
+Also, check out the helper functions: `contains()`, `starts_with()`, and `ends_with()`, i.e.:
+
+
+```r
+student_responses %&gt;% 
+  select(contains("sci"))
+```
+
+---
+
+# Saving the results
+
+Note that we saved the output from the `select()` function to `student_mot_vars` but we could also save it back to `student_responses`, which would simply overwrite the original data frame (the following code is not run here):
+
+
+```r
+student_responses &lt;- # save object student_responses by...
+  student_responses %&gt;% # using dataframe student_responses
+  select(student_responses, SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
+```
+
+---
+
+# Renaming
+
+We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work. We are using `head()` to only print a few rows.
+
+
+```r
+student_responses %&gt;% # using dataframe student_responses
+  select(student_efficacy = SCIEEFF,
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI,
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE,
+  ) %&gt;% 
+  head(3)
 ```
 
 ```
-##  [1]  1.468071  1.781723  2.771785  3.750803  5.123466  5.855292  7.417685
-##  [8]  8.113606  8.738064 10.499314
+## # A tibble: 3 x 5
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1            3.28       2.16              1.73             2.16 
+## 2           -0.668      0.509             0.491           -0.501
+## 3           -1.62       0.0992           -0.638           -0.193
+## # … with 1 more variable: student_instrumental_motivation &lt;dbl&gt;
 ```
+
+---
+
+# Creating a new variable
+
+`mutate()` takes instructions to create a new variable.
+
+What goes *before* the equals sign is the name of the new variable.
+
+What goes after are the instructions.
+
+
+```r
+student_responses %&gt;% 
+  select(student_efficacy = SCIEEFF, 
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI, 
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE) %&gt;% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %&gt;% 
+  head(3)
+```
+
+```
+## # A tibble: 3 x 6
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1            3.28       2.16              1.73             2.16 
+## 2           -0.668      0.509             0.491           -0.501
+## 3           -1.62       0.0992           -0.638           -0.193
+## # … with 2 more variables: student_instrumental_motivation &lt;dbl&gt;,
+## #   student_joy_interest &lt;dbl&gt;
+```
+
+---
+
+# Filtering the data set
+
+Filter takes *logical statements* (statements that can evalute to true or false) to select a number of *rows* from a dataset.
+
+
+```r
+student_responses %&gt;% 
+  select(student_efficacy = SCIEEFF, 
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI, 
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE) %&gt;% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %&gt;% 
+  filter(student_joy_interest &gt; mean(student_joy_interest, na.rm = TRUE)) %&gt;% 
+  head(3)
+```
+
+```
+## # A tibble: 3 x 6
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1           3.28         2.16             1.73             2.16 
+## 2          -0.668        0.509            0.491           -0.501
+## 3          -0.0378       1.67             0.332            2.16 
+## # … with 2 more variables: student_instrumental_motivation &lt;dbl&gt;,
+## #   student_joy_interest &lt;dbl&gt;
+```
+
+---
+
+# Grouping and summarizing
+
+It is often useful to aggregate a data set.
+
+The `group_by()` and `summarize()` functions are especially helpful for this purpose.
+
+Let's find the mean and standard deviation (and counts) of student broad interest by teacher.
+
+
+```r
+student_responses %&gt;% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %&gt;% 
+  group_by(teacher_id) %&gt;% 
+  summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
+            student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
+            n = n()) %&gt;% 
+  head(3)
+```
+
+```
+## # A tibble: 3 x 4
+##   teacher_id student_broad_interest_mean student_broad_interest_sd     n
+##   &lt;chr&gt;                            &lt;dbl&gt;                     &lt;dbl&gt; &lt;int&gt;
+## 1 00001                          -0.157                      0.846    36
+## 2 00003                          -0.136                      1.08     31
+## 3 00004                          -0.0430                     1.26     39
+```
+
+---
+
+# Arranging
+
+Finally, let's arrange the table by the number of students in each class.
+
+`arrange()` sorts in order from the smallest to largest values.
+
+`desc()` tells `arrange()` to sort in descending order.
+
+
+```r
+student_responses %&gt;% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %&gt;% 
+  group_by(teacher_id) %&gt;% 
+  summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
+            student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
+            n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  head(3)
+```
+
+```
+## # A tibble: 3 x 4
+##   teacher_id student_broad_interest_mean student_broad_interest_sd     n
+##   &lt;chr&gt;                            &lt;dbl&gt;                     &lt;dbl&gt; &lt;int&gt;
+## 1 00107                           0.204                      0.786    42
+## 2 00117                           0.204                      0.893    42
+## 3 00131                           0.0349                     0.870    41
+```
+
+---
+
+# Counting
+
+Sometimes, we simply want to count the number of observations associated with each group.
+
+
+```r
+student_responses %&gt;% 
+  select(teacher_id = SCHID) %&gt;% 
+  count(teacher_id)
+```
+
+We could then use this as the basis of *other* summary statistics.
+
+
+```r
+student_responses %&gt;% 
+  select(teacher_id = SCHID) %&gt;% 
+  count(teacher_id) %&gt;% 
+  summarize(n_mean = mean(n),
+            n_sd = sd(n))
+```
+
+```
+## # A tibble: 1 x 2
+##   n_mean  n_sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1   32.3  8.61
+```
+
+On average, there are around 32 (*SD* = 8.61) students in each teachers' class.
+
+---
+
+class: inverse, center, middle
+# Demo doc (part 1): Try it out!
+
+---
+
+class: inverse, center, middle
+
+# Loading data
+
+---
+
+# Loading a CSV File
+
+Okay, we're ready to go. The easiest way to read a CSV file is with the function `read_csv()` from the package `readr`, which is contained within the Tidyverse.
+
+Again, we'll load (or have loaded, already) the tidyverse library.
+
+
+```r
+library(tidyverse) # so tidyverse packages can be used for analysis
+```
+
+Just as a recap of a line that we ran earlier. 
+
+
+```r
+student_responses &lt;- read_csv("data/student-responses-data.csv")
+```
+
+Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
+
+
+```r
+glimpse(student_responses)
+```
+
+You can also print the name of the object. 
+
+---
+
+# Loading Excel and SAV files
+
+## Loading Excel files
+
+
+```r
+install.packages("readxl")
+```
+
+
+```r
+library(readxl)
+```
+
+
+```r
+my_data &lt;-
+  read_excel("path/to/file.xlsx")
+```
+
+## Loading SAV files
+
+
+```r
+install.packages("haven")
+```
+
+
+```r
+library(haven)
+my_data &lt;-
+  read_sav("path/to/file.xlsx")
+```
+
+---
+
+# Saving (Writing) Files
+
+Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
+
+
+```r
+write_csv(student_responses, "student-responses.csv")
+```
+
+That will save a CSV file entitled `student-responses.csv` in the working directory. If you want to save it to another directory, simply add the file path to the file, i.e. `path/to/student-responses.csv`. To save a file for SPSS, load the haven package and use `write_sav()`. There is not a function to save an Excel file, but you can save as a CSV and directly load it in Excel.
+
+---
+
+class: inverse, center, middle
+
+# Visualizing data
+
+---
+
+*ggplot2* is a tidyverse package for creating visualizations (or figures).
+
+It is very flexible ... but can also be a bit challenging to use, at first.
+
+Let's work with a smaller data set, for now.
+
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
+  select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
+         student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
+         student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
+         student_epistemic_beliefs = EPIST, # selecting variable EPIST and renaming to student_epistemic_beliefs
+         student_instrumental_motivation = INSTSCIE,  # selecting variable INSTSCIE and renaming to student_instrumental_motivation
+         teacher_id = SCHID
+  )
+```
+
+---
+
+# Scatter plot
+
+
+```r
+ggplot(student_mot_vars,
+       aes(x = student_efficacy, y = student_broad_interest)) +
+  geom_point()
+```
+
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatter plot with a regression line
+
+
+```r
+ggplot(student_mot_vars,
+       aes(x = student_efficacy, y = student_broad_interest)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatter plot with a regression line and some cleaning up
+
+
+```r
+ggplot(student_mot_vars,
+       aes(x = student_efficacy, y = student_broad_interest)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  xlab("Student Efficacy") +
+  ylab("Student Broad Interest")
+```
+
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-47-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatter plot with a regression line and some cleaning up
+
+
+```r
+ggplot(student_mot_vars,
+       aes(x = student_efficacy, y = student_broad_interest)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  xlab("Student Efficacy") +
+  ylab("Student Broad Interest")
+```
+
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+
+---
+
+class: inverse, center, middle
+# Demo doc (part 2)
+
+---
+
+class: inverse, center, middle
+
+# Modeling data
+
+---
+
+# Linear models
+
+---
+
+# Multi-level models
+
+---
+
+# Latent variable models
+
+---
+
+class: inverse, center, middle
+# Demo doc (part 3)
+
+---
+
+class: inverse, center, middle
+# Questions, other
+
+---
+
+# R Markdown
+
+---
+
+# APA Tables
+
+---
+
+# Papaja
+
+---
+
+# Redoc
+
 
 ---
 

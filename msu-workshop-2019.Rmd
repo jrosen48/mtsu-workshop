@@ -20,18 +20,36 @@ library(knitr)
 library(tidyverse)
 ```
 
-# Who am I?
+# #whoami1
 
 .pull-left[
-* Assistant Professor: STEM Education, University of Tennessee, Knoxville
+* Dr. Joshua Rosenberg
+* Assistant Professor, STEM Education, University of Tennessee, Knoxville
 * Dad (one-year-old toddler!)
 * Primary areas of interest
-+ Data science in education (network analytic methods, experience sampling method, computational grounded theory)
-+ Data science education (integrating data science and science education)
+  * Data science in education
+  * Data science education
 ]
 
 ```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
 include_graphics("img/kr-joro.jpg")
+```
+
+---
+
+# #whoami2
+
+.pull-left[
+* Dr. Emily Bovee
+* Director of Educational Development and Assessment: Marquette University School of Dentistry
+* Cat mom
+* Primary areas of interest
+  * Understanding student motivation in higher education and professional education
+  * Data science education 
+]
+
+```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
+include_graphics("img/ebv.jpg")
 ```
 
 ---
@@ -46,12 +64,13 @@ class: inverse, center, middle
 
 1. Why learn R?
 1. Getting started with R Studio
-1. Visualizing data
+1. Computer science foundations
 1. Processing data
+1. Loading data
+1. Visualizing data
+1. Modeling data 
 1. Learning and doing more with R
-1. Modeling data (time permitting)
-1. Computer programming basics (time permitting)
-1. Creating reproducible reports (time permitting)
+1. Questions and sundry tools (time permitting)
 
 ---
 
@@ -62,7 +81,7 @@ class: inverse, center, middle
 * It is a programming language and so is quite flexible
 * There is a great, inclusive community of users and developers (and teachers)
 * It is cross-platform, open-source, and freely-available
-
+* It can h
 ---
 
 class: inverse, center, middle
@@ -180,8 +199,6 @@ dat <- # example data frame
   tibble(letter = c("A", "A", "A", "B", "B"),
          number = c(1L, 2L, 3L, 4L, 5L))
 
-dat
-
 filter(dat, letter == "A")
 ```
 
@@ -189,19 +206,17 @@ filter(dat, letter == "A")
 
 # Configuring R Studio
 
-One important consideration is whether to save your workspace when you close R Studio. 
-
 By default, R Studio saves all of the objects in your environment. In general, this is not ideal, because it means that you may have taken steps interactively that are not documented your code.
 
-An easy way to change this is to tell R Studio to start from scratch (in terms of your workspace) each time you open it. You can do that by changing the dropdown menu pointed out in the image below to "Never".
-
-![optional caption text](img/save-workspace-reminder.jpg)
+```{r, out.width = "425px", echo= FALSE, fig.align = "center"}
+include_graphics("img/save-workspace-reminder.jpg")
+```
 
 ---
 
-# The Tidyverse
+# The tidyverse
 
-The Tidyverse is a set of packages for data manipulation, exploration, and visualization using the design philosophy of 'tidy' data. Tidy data has a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.
+The tidyverse is a set of packages for data manipulation, exploration, and visualization using the design philosophy of 'tidy' data. Tidy data has a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.
 
 The packages contained in the Tidyverse provide useful functions that augment base R functionality.
 
@@ -215,25 +230,85 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
-**For more information on tidy data, check out [Hadley Wickhams's Tidy Data paper](http://vita.had.co.nz/papers/tidy-data.html).**
-
 ---
 
 class: inverse, center, middle
 
-# Computer science basics
+# Computer science foundations
+---
+
+# Data structures
+
+- Data Frame
+
+````{r}
+data.frame(var1 = c("a", "b", "c"),
+           var2 = c(4, 2, 5))
+```
+
+- Tibble
+
+```{r}
+library(tidyverse)
+tibble(var1 = c("a", "b", "c"),
+       var2 = c(4, 2, 5))
+```
 
 ---
 
-# Objects, functions, directories, and data structures, oh my
+# Data structures
 
-Here'ss a short URL:
+```{r}
+vec1 = c("a", "b", "c")
+vec1 
+```
 
-`https://goo.gl/bUeMhV`
+```{r}
+vec2 = c(4, 2, 5)
+vec2
+```
 
-This is what it resolves to (it's a CSV file):
+```{r}
+tibble(var1 = vec1,
+       var2 = vec2)
+```
 
-`https://raw.githubusercontent.com/data-edu/data-science-in-education/master/data/pisaUSA15/stu-quest.csv`
+---
+
+# Conditional logic 
+
+- `ifelse()`
+
+```{r}
+vec1 <- runif(10) # generates random number between 0 and 1
+d1 <- tibble(var1 = vec1)
+
+d1 %>% 
+  mutate(var2 = ifelse(vec1 >= .5, "greater", "lesser"))
+```
+
+---
+
+# Conditional logic 
+
+- `dplyr::case_when()`
+
+```{r}
+d1 %>% 
+  mutate(var2 = case_when(
+    var1 >= .75 ~ "a lot",
+    var1 >= .5 ~ "greater",
+    var1 < .5 ~ "lesser",
+    var1 <= .25 ~ "very little" 
+  ))
+```
+
+---
+# Objects, functions, directories, and data structures
+
+Here's a short URL: `https://goo.gl/bUeMhV`
+
+This is what it resolves to (it's a CSV file): `https://raw.githubusercontent.com/data-edu/data-science-in-education/master/data/pisaUSA15/stu-quest.csv`
 
 This chunk of code will save that file to a data directory in our working environment.
 
@@ -255,7 +330,7 @@ download.file(
 
 1. The *character string* `"https://goo.gl/wPmujv"` is being saved to an *object* called `student_responses_url`.
 
-```{r}
+```{r, eval = FALSE}
 student_responses_url <-
   "https://goo.gl/bUeMhV"
 ```
@@ -266,7 +341,7 @@ student_responses_url <-
 
 2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `paste0`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
 
-```{r}
+```{r, eval = FALSE}
 student_responses_file_name <-
   str_c(getwd(), "./data/student-responses-data.csv")
 ```
@@ -287,10 +362,6 @@ download.file(
   destfile = student_responses_file_name)
 ```
 
-Understanding how R is working in these terms can be helpful for troubleshooting and reaching out for help. 
-
-It also helps you to use functions that you have never used before because you are familiar with how some functions work.
-
 ---
 class: inverse, center, middle
 # Processing Data
@@ -298,14 +369,29 @@ class: inverse, center, middle
 
 # The pipe: %>% 
 
-We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%>%`. It lets you *compose* functions. It does this by passing the output of one function to the next. A handy shortcut for writing out `%>%` is Command + Shift + M.
+First, let's load the data we downloaded in the last step.
 
-Here's an example. Let's say that we want to select a few variables from the `student_responses` dataset and save those variables into a new object, `student_mot_vars`. Here's how we would do that using `dplyr::select()`.
+```{r, message = FALSE}
+student_responses <- read_csv("data/student-responses-data.csv")
+```
 
-```{r}
+We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%>%`. It lets you *compose* functions. It does this by passing the output of one function to the next.
+
+Select reduces the number of *columns* of a dataset.
+
+```{r, eval = FALSE}
 student_mot_vars <- # save object student_mot_vars by...
   student_responses %>% # using dataframe student_responses
   select(SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
+
+student_mot_vars
+```
+
+Also, check out the helper functions: `contains()`, `starts_with()`, and `ends_with()`, i.e.:
+
+```{r, eval = FALSE}
+student_responses %>% 
+  select(contains("sci"))
 ```
 
 ---
@@ -324,52 +410,202 @@ student_responses <- # save object student_responses by...
 
 # Renaming
 
-We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work.
+We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work. We are using `head()` to only print a few rows.
 
 ```{r}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
-  select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
-         student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
-         student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
-         student_epistemic_beliefs = EPIST, # selecting variable EPIST and renaming to student_epistemic_beliefs
-         student_instrumental_motivation = INSTSCIE # selecting variable INSTSCIE and renaming to student_instrumental_motivation
-  )
+student_responses %>% # using dataframe student_responses
+  select(student_efficacy = SCIEEFF,
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI,
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE,
+  ) %>% 
+  head(3)
 ```
 
 ---
 
-# Processing data (part 1 of 4)
+# Creating a new variable
 
-* `select()`
-* `rename()`
-* `filter()`
-* `mutate()`
+`mutate()` takes instructions to create a new variable.
 
----
+What goes *before* the equals sign is the name of the new variable.
 
-# Processing data (part 2 of 4)
+What goes after are the instructions.
 
-* `group_by()`
-* `count()`
-* `summarize()`
-
----
-
-# Processing data (part 3 of 4)
-
-* `left_join()`
-* `right_join()`
-* `semi_join()`
-* `anti_join()`
+```{r}
+student_responses %>% 
+  select(student_efficacy = SCIEEFF, 
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI, 
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE) %>% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %>% 
+  head(3)
+```
 
 ---
 
-# Processing data (part 4 of 4)
+# Filtering the data set
 
-* `gather()`
-* `spread()`
+Filter takes *logical statements* (statements that can evalute to true or false) to select a number of *rows* from a dataset.
 
+```{r}
+student_responses %>% 
+  select(student_efficacy = SCIEEFF, 
+         student_joy = JOYSCIE, 
+         student_broad_interest = INTBRSCI, 
+         student_epistemic_beliefs = EPIST,
+         student_instrumental_motivation = INSTSCIE) %>% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %>% 
+  filter(student_joy_interest > mean(student_joy_interest, na.rm = TRUE)) %>% 
+  head(3)
+```
+
+---
+
+# Grouping and summarizing
+
+It is often useful to aggregate a data set.
+
+The `group_by()` and `summarize()` functions are especially helpful for this purpose.
+
+Let's find the mean and standard deviation (and counts) of student broad interest by teacher.
+
+```{r}
+student_responses %>% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %>% 
+  group_by(teacher_id) %>% 
+  summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
+            student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
+            n = n()) %>% 
+  head(3)
+```
+
+---
+
+# Arranging
+
+Finally, let's arrange the table by the number of students in each class.
+
+`arrange()` sorts in order from the smallest to largest values.
+
+`desc()` tells `arrange()` to sort in descending order.
+
+```{r}
+student_responses %>% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %>% 
+  group_by(teacher_id) %>% 
+  summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
+            student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
+            n = n()) %>% 
+  arrange(desc(n)) %>% 
+  head(3)
+```
+
+---
+
+# Counting
+
+Sometimes, we simply want to count the number of observations associated with each group.
+
+```{r, eval = FALSE}
+student_responses %>% 
+  select(teacher_id = SCHID) %>% 
+  count(teacher_id)
+```
+
+We could then use this as the basis of *other* summary statistics.
+
+```{r}
+student_responses %>% 
+  select(teacher_id = SCHID) %>% 
+  count(teacher_id) %>% 
+  summarize(n_mean = mean(n),
+            n_sd = sd(n))
+```
+
+On average, there are around 32 (*SD* = 8.61) students in each teachers' class.
+
+---
+
+class: inverse, center, middle
+# Demo doc (part 1): Try it out!
+
+---
+
+class: inverse, center, middle
+
+# Loading data
+
+---
+
+# Loading a CSV File
+
+Okay, we're ready to go. The easiest way to read a CSV file is with the function `read_csv()` from the package `readr`, which is contained within the Tidyverse.
+
+Again, we'll load (or have loaded, already) the tidyverse library.
+
+```{r, message = F}
+library(tidyverse) # so tidyverse packages can be used for analysis
+```
+
+Just as a recap of a line that we ran earlier. 
+
+```{r, eval = TRUE, message = FALSE}
+student_responses <- read_csv("data/student-responses-data.csv")
+```
+
+Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
+
+```{r, eval = FALSE}
+glimpse(student_responses)
+```
+
+You can also print the name of the object. 
+
+---
+
+# Loading Excel and SAV files
+
+## Loading Excel files
+
+```{r, eval = FALSE}
+install.packages("readxl")
+```
+
+```{r}
+library(readxl)
+```
+
+```{r, eval = FALSE}
+my_data <-
+  read_excel("path/to/file.xlsx")
+```
+
+## Loading SAV files
+
+```{r, eval = FALSE}
+install.packages("haven")
+```
+
+```{r, eval = FALSE}
+library(haven)
+my_data <-
+  read_sav("path/to/file.xlsx")
+```
+
+---
+
+# Saving (Writing) Files
+
+Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
+
+```{r, eval = FALSE}
+write_csv(student_responses, "student-responses.csv")
+```
+
+That will save a CSV file entitled `student-responses.csv` in the working directory. If you want to save it to another directory, simply add the file path to the file, i.e. `path/to/student-responses.csv`. To save a file for SPSS, load the haven package and use `write_sav()`. There is not a function to save an Excel file, but you can save as a CSV and directly load it in Excel.
 
 ---
 
@@ -384,6 +620,7 @@ class: inverse, center, middle
 It is very flexible ... but can also be a bit challenging to use, at first.
 
 Let's work with a smaller data set, for now.
+
 ```{r}
 student_mot_vars <- # save object student_mot_vars by...
   student_responses %>% # using dataframe student_responses
@@ -447,13 +684,8 @@ ggplot(student_mot_vars,
 
 ---
 
+class: inverse, center, middle
 # Demo doc (part 2)
-
----
-
----
-
-
 
 ---
 
@@ -476,83 +708,12 @@ class: inverse, center, middle
 ---
 
 class: inverse, center, middle
-
-# Loading data
-
----
-
-# Loading a CSV File
-
-Okay, we're ready to go. The easiest way to read a CSV file is with the function `read_csv()` from the package `readr`, which is contained within the Tidyverse.
-
-Let's load the tidyverse library, first.
-
-```{r, message = F}
-library(tidyverse) # so tidyverse packages can be used for analysis
-```
-
-After loading the tidyverse packages, we can now load a file. We are going to call the data `student_responses`:
-
-```{r, eval = TRUE}
-student_responses <-
-  read_csv("./data/student-responses-data.csv")
-```
-
-Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
-
-```{r, eval = FALSE}
-glimpse(student_responses)
-```
-
----
-
-# Loading Excel files
-
-```{r, eval = FALSE}
-install.packages("readxl")
-```
-
-```{r}
-library(readxl)
-```
-
-We can then use the function `read_excel()` in the same way as `read_csv()`, where "path/to/file.xlsx" is where an Excel file you want to load is located (note that this code is not run here):
-
-```{r, eval = FALSE}
-my_data <-
-  read_excel("path/to/file.xlsx")
-```
-
----
-
-# Loading SAV files
-
-```{r, eval = FALSE}
-install.packages("haven")
-```
-
-```{r, eval = FALSE}
-library(haven)
-my_data <-
-  read_sav("path/to/file.xlsx")
-```
-
----
-
-# Saving Files
-
-Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
-
-```{r, eval = FALSE}
-write_csv(student_responses, "student-responses.csv")
-```
-
-That will save a CSV file entitled `student-responses.csv` in the working directory. If you want to save it to another directory, simply add the file path to the file, i.e. `path/to/student-responses.csv`. To save a file for SPSS, load the haven package and use `write_sav()`. There is not a function to save an Excel file, but you can save as a CSV and directly load it in Excel.
+# Demo doc (part 3)
 
 ---
 
 class: inverse, center, middle
-# Creating reproducible reports
+# Questions, other
 
 ---
 
@@ -570,142 +731,6 @@ class: inverse, center, middle
 
 # Redoc
 
----
-
-
-class: inverse, center, middle
-
-# Computer programming basics
-
----
-
-# Objects and variables
-
-```{r}
-my_object <- 1
-my_other_object <- c(1:10)
-```
-
-Reading in a CSV and assigning it to an object
-
-```{r}
-my_df <- read_csv("example-data.csv")
-my_df
-```
-
----
-
-# Data structures
-
-- Data Frame
-
-````{r}
-data.frame(var1 = c("a", "b", "c"),
-           var2 = c(4, 2, 5))
-```
-
-- Tibble
-
-```{r}
-library(tidyverse)
-tibble(var1 = c("a", "b", "c"),
-       var2 = c(4, 2, 5))
-```
-
----
-
-# Data structures
-
-```{r}
-vec1 = c("a", "b", "c")
-vec1 
-```
-
-```{r}
-vec2 = c(4, 2, 5)
-vec2
-```
-
-```{r}
-library(tibble)
-tibble(var1 = vec1,
-       var2 = vec2)
-```
-
-# Conditional logic 
-
-- `ifelse()`
-
-```{r}
-vec1 <- runif(10) # generates random number between 0 and 1
-d1 <- tibble(var1 = vec1)
-
-d1 %>% 
-  mutate(var2 = ifelse(vec1 >= .5, "greater", "lesser"))
-```
-
-- `dplyr::case_when()`
-
-```{r}
-d1 %>% 
-  mutate(var2 = case_when(
-    var1 >= .75 ~ "a lot",
-    var1 >= .5 ~ "greater",
-    var1 < .5 ~ "lesser",
-    var1 <= .25 ~ "very little" 
-  ))
-```
-
----
-
-# Functions
-
-```{r}
-mean(c(1, 2, 3))
-```
-
-```{r}
-mean(c(1, 2, 3, NA))
-```
-
-```{r, eval = FALSE}
-?mean
-```
-
-```{r}
-mean(c(1, 2, 3, NA), na.rm = TRUE)
-```
-
----
-
-# Functions
-
-```{r, eval = FALSE}
-library(tidyverse)
-read_directory <- function(directory) {
-  map_df(list.files(directory), read_csv)
-}
-
-d <- read_directory("data")
-```
-
----
-
-# Iteration
-
-```{r}
-random_numbers <- rnorm(n = 10, mean = 0)
-random_numbers
-mean(random_numbers)
-sd(random_numbers)
-```
-
-```{r}
-library(tidyverse)
-1:10 %>%
-  map(~ rnorm(n = 10, mean = .x)) %>%
-  map_dbl(mean)
-```
 
 ---
 
