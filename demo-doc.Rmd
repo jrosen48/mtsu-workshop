@@ -1,0 +1,52 @@
+---
+title: "Workshop Demo Doc"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+gss_cat
+```
+
+# Select
+
+```{r}
+gss_cat %>% 
+  select(year, marital, tvhours)
+```
+
+Try it out! 
+
+Select three *different* variables
+
+```{r}
+gss_cat %>% 
+  select()
+```
+
+# Filter
+
+```{r}
+gss_cat %>% 
+  filter(age > 30)
+```
+
+Try it out!
+
+Filter to include only those individuals who watch a lot of TV - more than 10 hours per *day*!
+
+```{r}
+gss_cat %>% 
+  
+```
+
+# Mutate
+
+```{r}
