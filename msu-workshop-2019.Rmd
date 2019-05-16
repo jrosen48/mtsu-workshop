@@ -1,7 +1,7 @@
 ---
 title: "Won’t you be my neighboR?"
 subtitle: "An introduction to R for data science in education"
-author: "Joshua Rosenberg"
+author: "Joshua Rosenberg and Emily Bovee"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -81,7 +81,7 @@ class: inverse, center, middle
 * It is a programming language and so is quite flexible
 * There is a great, inclusive community of users and developers (and teachers)
 * It is cross-platform, open-source, and freely-available
-* It can h
+
 ---
 
 class: inverse, center, middle
@@ -148,20 +148,6 @@ We only have to install a package once, but to use it, we have to load it each t
 
 > A package is a like a book, a library is like a library; you use library() to check a package out of the library
 > - Hadley Wickham, Chief Scientist, R Studio
-
----
-
-# Running Functions from Packages
-
-Once you have loaded the package in your session, you can run the functions that are contained within that package. 
-
-To find a list of all those functions, you can run this in the R Studio console:
-
-```{r, eval = FALSE}
-help(package = dplyr)
-```
-
-The documentation should tell you what the function does, what arguments (i.e., details) needed for it to successfully run, examples, and what the output should look like.
 
 ---
 
@@ -536,6 +522,8 @@ class: inverse, center, middle
 
 *Note. Check out [R Studio Cloud](https://rstudio.cloud/) if you're having any installation trouble!*
 
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+
 ---
 
 class: inverse, center, middle
@@ -679,6 +667,8 @@ ggplot(student_mot_vars,
 class: inverse, center, middle
 # Demo doc (part 2)
 
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+
 ---
 
 class: inverse, center, middle
@@ -741,6 +731,7 @@ m2_mlm
 class: inverse, center, middle
 # Demo doc (part 3)
 
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
 ---
 
 
