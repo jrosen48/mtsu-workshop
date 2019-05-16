@@ -75,3 +75,103 @@ Let's create a new variable for those 60 years of age or older.
 gss_cat %>% 
   mutate(potential_senior = if_else(age >= 60, TRUE, FALSE))
 ```
+
+Let's save the results back to `gss_cat` and make sure that it worked.
+
+```{r}
+gss_cat <- gss_cat %>% 
+  mutate(potential_senior = if_else(age >= 60, TRUE, FALSE))
+```
+
+**Try it out!**
+
+Can you create a new variable based upon either the *year* or *tvhours* variable using `if_else()`? 
+
+```{r}
+gss_cat %>% 
+  mutate()
+```
+
+Then, save the results back to `gss_cat` (check out the code two chunks above for an example!).
+
+```{r}
+gss_cat %>% 
+  mutate()
+```
+
+# Demo doc (part 2): Try it out!
+
+`geom_jitter()` is exactly like geom_point, but with a small amount of x- and y-axis random noise added.
+
+```{r}
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter()
+```
+
+**Try it out!**
+
+Can you add a line representing the linear relationship between the two varibles? Add another layer using a `geom_` function.
+
+
+```{r}
+# hint: check out how a line was added in the presentation? 
+
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter() +
+  geom_
+```
+
+Let's try a different theme.
+
+```{r}
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter() +
+  theme_bw()
+```
+
+**Try it out!**
+
+Can you add a different theme? Start typing `theme_` and see what shows up! Be sure to run the code to see the results!
+
+```{r}
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter() +
+  theme_
+```
+
+Does the relationship look to be different by year?
+
+```{r}
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter() +
+  facet_wrap(~year)
+```
+
+**Try it out!**
+
+Can you add lines of best fit to the above plots?
+
+```{r}
+ggplot(gss_cat, aes(x = age, y = tvhours)) +
+  geom_jitter() +
+  geom_
+  facet_wrap(~year)
+```
+
+# Demo doc (part 3): Try it out!
+
+Let's run a regression.
+
+```{r}
+m1 <- lm(tvhours ~ age, summary = gss_ct)
+summary(m1)
+```
+
+**Try it out!**
+
+Can you add another variable to the model? If you need to check what variables are in `gss_cat`, print that object to the console.
+
+```{r}
+m2 <- lm(tvhours ~ age + , summary = gss_ct)
+summary(m1)
+```
