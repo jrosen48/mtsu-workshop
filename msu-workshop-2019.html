@@ -1,24 +1,28 @@
----
-title: "Won’t you be my neighboR?"
-subtitle: "An introduction to R for data science in education"
-author: "Joshua Rosenberg"
-date: "`r Sys.Date()`"
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, custom.css]
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Won’t you be my neighboR?</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Joshua Rosenberg" />
+    <meta name="date" content="2019-05-16" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Won’t you be my neighboR?
+## An introduction to R for data science in education
+### Joshua Rosenberg
+### 2019-05-16
+
 ---
 
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
 
-library(knitr)
-library(tidyverse)
-```
+
 
 # Who am I?
 
@@ -30,9 +34,7 @@ library(tidyverse)
 + Data science education (integrating data science and science education)
 ]
 
-```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
-include_graphics("img/kr-joro.jpg")
-```
+&lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -107,7 +109,8 @@ Names should be short and easy-to-remember but also informative.
 
 To download a package, you must call `install.packages()`:
 
-```{r, eval = FALSE}
+
+```r
 install.packages("dplyr")
 ```
 
@@ -121,14 +124,15 @@ Usually, writing code is a bit quicker, but using the interface can be very usef
 
 *After* the package is installed, it must be loaded into your R Studio session using `library()`:
 
-```{r}
+
+```r
 library(dplyr)
 ```
 
 We only have to install a package once, but to use it, we have to load it each time we start a new R session.
 
-> A package is a like a book, a library is like a library; you use library() to check a package out of the library
-> - Hadley Wickham, Chief Scientist, R Studio
+&gt; A package is a like a book, a library is like a library; you use library() to check a package out of the library
+&gt; - Hadley Wickham, Chief Scientist, R Studio
 
 ---
 
@@ -138,7 +142,8 @@ Once you have loaded the package in your session, you can run the functions that
 
 To find a list of all those functions, you can run this in the R Studio console:
 
-```{r, eval = FALSE}
+
+```r
 help(package = dplyr)
 ```
 
@@ -152,13 +157,15 @@ Vignettes are long-form documentation (and tutorials) that can provide a helpful
 
 Run `vignette()` in order to view *all* of the vignettes available for a package:
 
-```{r, eval = FALSE}
+
+```r
 vignette(package = "dplyr")
 ```
 
 Then, you can load a specific vignette.
 
-```{r, eval = FALSE}
+
+```r
 vignette("dplyr", package = "dplyr")
 ```
 
@@ -169,20 +176,44 @@ These are also available through CRAN (i.e., https://cran.r-project.org/web/pack
 
 If you know the specific function that you want to look up, you can run this in the R Studio console:
 
-```{r, eval = FALSE}
+
+```r
 ?dplyr::filter
 ```
 
 Once you know what you want to do with the function, you can run it in your code:
 
-```{r}
-dat <- # example data frame
+
+```r
+dat &lt;- # example data frame
   tibble(letter = c("A", "A", "A", "B", "B"),
          number = c(1L, 2L, 3L, 4L, 5L))
 
 dat
+```
 
+```
+## # A tibble: 5 x 2
+##   letter number
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 A           1
+## 2 A           2
+## 3 A           3
+## 4 B           4
+## 5 B           5
+```
+
+```r
 filter(dat, letter == "A")
+```
+
+```
+## # A tibble: 3 x 2
+##   letter number
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 A           1
+## 2 A           2
+## 3 A           3
 ```
 
 ---
@@ -207,11 +238,13 @@ The packages contained in the Tidyverse provide useful functions that augment ba
 
 You can installing and load the complete tidyverse with:
 
-```{r, eval = FALSE}
+
+```r
 install.packages("tidyverse")
 ```
 
-```{r, message = FALSE}
+
+```r
 library(tidyverse)
 ```
 
@@ -237,11 +270,12 @@ This is what it resolves to (it's a CSV file):
 
 This chunk of code will save that file to a data directory in our working environment.
 
-```{r, eval = FALSE}
-student_responses_url <-
+
+```r
+student_responses_url &lt;-
   "https://goo.gl/bUeMhV"
 
-student_responses_file_name <-
+student_responses_file_name &lt;-
   paste0(getwd(), "/data/student-responses-data.csv")
 
 download.file(
@@ -255,8 +289,9 @@ download.file(
 
 1. The *character string* `"https://goo.gl/wPmujv"` is being saved to an *object* called `student_responses_url`.
 
-```{r}
-student_responses_url <-
+
+```r
+student_responses_url &lt;-
   "https://goo.gl/bUeMhV"
 ```
 
@@ -266,8 +301,9 @@ student_responses_url <-
 
 2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `paste0`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
 
-```{r}
-student_responses_file_name <-
+
+```r
+student_responses_file_name &lt;-
   str_c(getwd(), "./data/student-responses-data.csv")
 ```
 
@@ -281,7 +317,8 @@ In short, the `download.file()` function needs to know
 - where the file is coming from (which you tell it through the `url`) argument and
 - where the file will be saved (which you tell it through the `destfile` argument).
 
-```{r, eval = FALSE}
+
+```r
 download.file(
   url = student_responses_url,
   destfile = student_responses_file_name)
@@ -296,15 +333,16 @@ class: inverse, center, middle
 # Processing Data
 ---
 
-# The pipe: %>% 
+# The pipe: %&gt;% 
 
-We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%>%`. It lets you *compose* functions. It does this by passing the output of one function to the next. A handy shortcut for writing out `%>%` is Command + Shift + M.
+We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%&gt;%`. It lets you *compose* functions. It does this by passing the output of one function to the next. A handy shortcut for writing out `%&gt;%` is Command + Shift + M.
 
 Here's an example. Let's say that we want to select a few variables from the `student_responses` dataset and save those variables into a new object, `student_mot_vars`. Here's how we would do that using `dplyr::select()`.
 
-```{r}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
   select(SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
 ```
 
@@ -314,9 +352,10 @@ student_mot_vars <- # save object student_mot_vars by...
 
 Note that we saved the output from the `select()` function to `student_mot_vars` but we could also save it back to `student_responses`, which would simply overwrite the original data frame (the following code is not run here):
 
-```{r, eval = FALSE}
-student_responses <- # save object student_responses by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_responses &lt;- # save object student_responses by...
+  student_responses %&gt;% # using dataframe student_responses
   select(student_responses, SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
 ```
 
@@ -326,9 +365,10 @@ student_responses <- # save object student_responses by...
 
 We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work.
 
-```{r}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
   select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
          student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
          student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
@@ -384,9 +424,10 @@ class: inverse, center, middle
 It is very flexible ... but can also be a bit challenging to use, at first.
 
 Let's work with a smaller data set, for now.
-```{r}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
   select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
          student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
          student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
@@ -400,28 +441,35 @@ student_mot_vars <- # save object student_mot_vars by...
 
 # Scatter plot
 
-```{r, warning = FALSE}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point()
 ```
 
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+
 ---
 
 # Scatter plot with a regression line
 
-```{r, warning = FALSE}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
 
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+
 ---
 
 # Scatter plot with a regression line and some cleaning up
 
-```{r, warning = FALSE}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
@@ -431,11 +479,14 @@ ggplot(student_mot_vars,
   ylab("Student Broad Interest")
 ```
 
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+
 ---
 
 # Scatter plot with a regression line and some cleaning up
 
-```{r, warning = FALSE}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
@@ -444,6 +495,8 @@ ggplot(student_mot_vars,
   xlab("Student Efficacy") +
   ylab("Student Broad Interest")
 ```
+
+![](msu-workshop-2019_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -487,20 +540,55 @@ Okay, we're ready to go. The easiest way to read a CSV file is with the function
 
 Let's load the tidyverse library, first.
 
-```{r, message = F}
+
+```r
 library(tidyverse) # so tidyverse packages can be used for analysis
 ```
 
 After loading the tidyverse packages, we can now load a file. We are going to call the data `student_responses`:
 
-```{r, eval = TRUE}
-student_responses <-
+
+```r
+student_responses &lt;-
   read_csv("./data/student-responses-data.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   CNT = col_character(),
+##   CYC = col_character(),
+##   NatCen = col_character(),
+##   STRATUM = col_character(),
+##   Option_Read = col_character(),
+##   Option_Math = col_character(),
+##   ST011D17TA = col_character(),
+##   ST011D18TA = col_character(),
+##   ST011D19TA = col_character(),
+##   ST124Q01TA = col_logical(),
+##   IC001Q01TA = col_logical(),
+##   IC001Q02TA = col_logical(),
+##   IC001Q03TA = col_logical(),
+##   IC001Q04TA = col_logical(),
+##   IC001Q05TA = col_logical(),
+##   IC001Q06TA = col_logical(),
+##   IC001Q07TA = col_logical(),
+##   IC001Q08TA = col_logical(),
+##   IC001Q09TA = col_logical(),
+##   IC001Q10TA = col_logical()
+##   # ... with 420 more columns
+## )
+```
+
+```
+## See spec(...) for full column specifications.
 ```
 
 Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
 
-```{r, eval = FALSE}
+
+```r
 glimpse(student_responses)
 ```
 
@@ -508,18 +596,21 @@ glimpse(student_responses)
 
 # Loading Excel files
 
-```{r, eval = FALSE}
+
+```r
 install.packages("readxl")
 ```
 
-```{r}
+
+```r
 library(readxl)
 ```
 
 We can then use the function `read_excel()` in the same way as `read_csv()`, where "path/to/file.xlsx" is where an Excel file you want to load is located (note that this code is not run here):
 
-```{r, eval = FALSE}
-my_data <-
+
+```r
+my_data &lt;-
   read_excel("path/to/file.xlsx")
 ```
 
@@ -527,13 +618,15 @@ my_data <-
 
 # Loading SAV files
 
-```{r, eval = FALSE}
+
+```r
 install.packages("haven")
 ```
 
-```{r, eval = FALSE}
+
+```r
 library(haven)
-my_data <-
+my_data &lt;-
   read_sav("path/to/file.xlsx")
 ```
 
@@ -543,7 +636,8 @@ my_data <-
 
 Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
 
-```{r, eval = FALSE}
+
+```r
 write_csv(student_responses, "student-responses.csv")
 ```
 
@@ -581,16 +675,55 @@ class: inverse, center, middle
 
 # Objects and variables
 
-```{r}
-my_object <- 1
-my_other_object <- c(1:10)
+
+```r
+my_object &lt;- 1
+my_other_object &lt;- c(1:10)
 ```
 
 Reading in a CSV and assigning it to an object
 
-```{r}
-my_df <- read_csv("example-data.csv")
+
+```r
+my_df &lt;- read_csv("example-data.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   mpg = col_double(),
+##   cyl = col_double(),
+##   disp = col_double(),
+##   hp = col_double(),
+##   drat = col_double(),
+##   wt = col_double(),
+##   qsec = col_double(),
+##   vs = col_double(),
+##   am = col_double(),
+##   gear = col_double(),
+##   carb = col_double()
+## )
+```
+
+```r
 my_df
+```
+
+```
+## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows
 ```
 
 ---
@@ -599,112 +732,227 @@ my_df
 
 - Data Frame
 
-````{r}
+
+```r
 data.frame(var1 = c("a", "b", "c"),
            var2 = c(4, 2, 5))
 ```
 
+```
+##   var1 var2
+## 1    a    4
+## 2    b    2
+## 3    c    5
+```
+
 - Tibble
 
-```{r}
+
+```r
 library(tidyverse)
 tibble(var1 = c("a", "b", "c"),
        var2 = c(4, 2, 5))
+```
+
+```
+## # A tibble: 3 x 2
+##   var1   var2
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a         4
+## 2 b         2
+## 3 c         5
 ```
 
 ---
 
 # Data structures
 
-```{r}
+
+```r
 vec1 = c("a", "b", "c")
 vec1 
 ```
 
-```{r}
+```
+## [1] "a" "b" "c"
+```
+
+
+```r
 vec2 = c(4, 2, 5)
 vec2
 ```
 
-```{r}
+```
+## [1] 4 2 5
+```
+
+
+```r
 library(tibble)
 tibble(var1 = vec1,
        var2 = vec2)
+```
+
+```
+## # A tibble: 3 x 2
+##   var1   var2
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a         4
+## 2 b         2
+## 3 c         5
 ```
 
 # Conditional logic 
 
 - `ifelse()`
 
-```{r}
-vec1 <- runif(10) # generates random number between 0 and 1
-d1 <- tibble(var1 = vec1)
 
-d1 %>% 
-  mutate(var2 = ifelse(vec1 >= .5, "greater", "lesser"))
+```r
+vec1 &lt;- runif(10) # generates random number between 0 and 1
+d1 &lt;- tibble(var1 = vec1)
+
+d1 %&gt;% 
+  mutate(var2 = ifelse(vec1 &gt;= .5, "greater", "lesser"))
+```
+
+```
+## # A tibble: 10 x 2
+##      var1 var2   
+##     &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.401  lesser 
+##  2 0.0173 lesser 
+##  3 0.107  lesser 
+##  4 0.0124 lesser 
+##  5 0.383  lesser 
+##  6 0.116  lesser 
+##  7 0.257  lesser 
+##  8 0.333  lesser 
+##  9 0.882  greater
+## 10 0.396  lesser
 ```
 
 - `dplyr::case_when()`
 
-```{r}
-d1 %>% 
+
+```r
+d1 %&gt;% 
   mutate(var2 = case_when(
-    var1 >= .75 ~ "a lot",
-    var1 >= .5 ~ "greater",
-    var1 < .5 ~ "lesser",
-    var1 <= .25 ~ "very little" 
+    var1 &gt;= .75 ~ "a lot",
+    var1 &gt;= .5 ~ "greater",
+    var1 &lt; .5 ~ "lesser",
+    var1 &lt;= .25 ~ "very little" 
   ))
 ```
 
+```
+## # A tibble: 10 x 2
+##      var1 var2  
+##     &lt;dbl&gt; &lt;chr&gt; 
+##  1 0.401  lesser
+##  2 0.0173 lesser
+##  3 0.107  lesser
+##  4 0.0124 lesser
+##  5 0.383  lesser
+##  6 0.116  lesser
+##  7 0.257  lesser
+##  8 0.333  lesser
+##  9 0.882  a lot 
+## 10 0.396  lesser
+```
+
 ---
 
 # Functions
 
-```{r}
+
+```r
 mean(c(1, 2, 3))
 ```
 
-```{r}
+```
+## [1] 2
+```
+
+
+```r
 mean(c(1, 2, 3, NA))
 ```
 
-```{r, eval = FALSE}
+```
+## [1] NA
+```
+
+
+```r
 ?mean
 ```
 
-```{r}
+
+```r
 mean(c(1, 2, 3, NA), na.rm = TRUE)
+```
+
+```
+## [1] 2
 ```
 
 ---
 
 # Functions
 
-```{r, eval = FALSE}
+
+```r
 library(tidyverse)
-read_directory <- function(directory) {
+read_directory &lt;- function(directory) {
   map_df(list.files(directory), read_csv)
 }
 
-d <- read_directory("data")
+d &lt;- read_directory("data")
 ```
 
 ---
 
 # Iteration
 
-```{r}
-random_numbers <- rnorm(n = 10, mean = 0)
+
+```r
+random_numbers &lt;- rnorm(n = 10, mean = 0)
 random_numbers
+```
+
+```
+##  [1]  1.5418574  1.2157419 -0.6011514  0.3834474  0.1673197  0.2204637
+##  [7] -0.3013052  0.9534650 -0.8033726  0.1744208
+```
+
+```r
 mean(random_numbers)
+```
+
+```
+## [1] 0.2950887
+```
+
+```r
 sd(random_numbers)
 ```
 
-```{r}
+```
+## [1] 0.763421
+```
+
+
+```r
 library(tidyverse)
-1:10 %>%
-  map(~ rnorm(n = 10, mean = .x)) %>%
+1:10 %&gt;%
+  map(~ rnorm(n = 10, mean = .x)) %&gt;%
   map_dbl(mean)
+```
+
+```
+##  [1] 0.8649398 1.6100104 2.9005362 3.8407822 4.6121014 6.0793774 6.6650312
+##  [8] 7.8259388 9.1022992 9.8302592
 ```
 
 ---
@@ -714,3 +962,51 @@ library(tidyverse)
 ---
 
 # Following up
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
