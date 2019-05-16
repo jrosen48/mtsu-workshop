@@ -3,7 +3,7 @@
   <head>
     <title>Won’t you be my neighboR?</title>
     <meta charset="utf-8">
-    <meta name="author" content="Joshua Rosenberg" />
+    <meta name="author" content="Joshua Rosenberg and Emily Bovee" />
     <meta name="date" content="2019-05-16" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 
 # Won’t you be my neighboR?
 ## An introduction to R for data science in education
-### Joshua Rosenberg
+### Joshua Rosenberg and Emily Bovee
 ### 2019-05-16
 
 ---
@@ -70,7 +70,7 @@ class: inverse, center, middle
 1. Visualizing data
 1. Modeling data 
 1. Learning and doing more with R
-1. Questions and sundry tools (time permitting)
+1. Questions
 
 ---
 
@@ -81,7 +81,7 @@ class: inverse, center, middle
 * It is a programming language and so is quite flexible
 * There is a great, inclusive community of users and developers (and teachers)
 * It is cross-platform, open-source, and freely-available
-* It can h
+
 ---
 
 class: inverse, center, middle
@@ -150,21 +150,6 @@ We only have to install a package once, but to use it, we have to load it each t
 
 &gt; A package is a like a book, a library is like a library; you use library() to check a package out of the library
 &gt; - Hadley Wickham, Chief Scientist, R Studio
-
----
-
-# Running Functions from Packages
-
-Once you have loaded the package in your session, you can run the functions that are contained within that package. 
-
-To find a list of all those functions, you can run this in the R Studio console:
-
-
-```r
-help(package = dplyr)
-```
-
-The documentation should tell you what the function does, what arguments (i.e., details) needed for it to successfully run, examples, and what the output should look like.
 
 ---
 
@@ -346,16 +331,16 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##      var1 var2   
 ##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.0176 lesser 
-##  2 0.585  greater
-##  3 0.437  lesser 
-##  4 0.660  greater
-##  5 0.454  lesser 
-##  6 0.373  lesser 
-##  7 0.822  greater
-##  8 0.550  greater
-##  9 0.633  greater
-## 10 0.504  greater
+##  1 0.0171 lesser 
+##  2 0.847  greater
+##  3 0.239  lesser 
+##  4 0.546  greater
+##  5 0.577  greater
+##  6 0.221  lesser 
+##  7 0.425  lesser 
+##  8 0.819  greater
+##  9 0.854  greater
+## 10 0.0299 lesser
 ```
 
 ---
@@ -379,16 +364,16 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##      var1 var2   
 ##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.0176 lesser 
-##  2 0.585  greater
-##  3 0.437  lesser 
-##  4 0.660  greater
-##  5 0.454  lesser 
-##  6 0.373  lesser 
-##  7 0.822  a lot  
-##  8 0.550  greater
-##  9 0.633  greater
-## 10 0.504  greater
+##  1 0.0171 lesser 
+##  2 0.847  a lot  
+##  3 0.239  lesser 
+##  4 0.546  greater
+##  5 0.577  greater
+##  6 0.221  lesser 
+##  7 0.425  lesser 
+##  8 0.819  a lot  
+##  9 0.854  a lot  
+## 10 0.0299 lesser
 ```
 
 ---
@@ -506,17 +491,19 @@ student_responses &lt;- # save object student_responses by...
 
 # Renaming
 
-We can also rename the variables at the same time we select them. I put these on separate lines so I could add the comment, but you could do this all in the same line, too. It does not make a difference in terms of how `select()` will work. We are using `head()` to only print a few rows.
+We can also rename the variables at the same time we select them. Let's save the results to `student_mot_vars`.
 
 
 ```r
-student_responses %&gt;% # using dataframe student_responses
+student_mot_vars &lt;- student_responses %&gt;% 
   select(student_efficacy = SCIEEFF,
          student_joy = JOYSCIE, 
          student_broad_interest = INTBRSCI,
          student_epistemic_beliefs = EPIST,
          student_instrumental_motivation = INSTSCIE,
-  ) %&gt;% 
+  )
+
+student_mot_vars %&gt;% 
   head(3)
 ```
 
@@ -692,6 +679,10 @@ On average, there are around 32 (*SD* = 8.61) students in each teachers' class.
 class: inverse, center, middle
 # Demo doc (part 1): Try it out!
 
+*Note. Check out [R Studio Cloud](https://rstudio.cloud/) if you're having any installation trouble!*
+
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+
 ---
 
 class: inverse, center, middle
@@ -784,9 +775,9 @@ class: inverse, center, middle
 
 ---
 
-*ggplot2* is a tidyverse package for creating visualizations (or figures).
+# The grammar of graphics
 
-It is very flexible ... but can also be a bit challenging to use, at first.
+*ggplot2* is a tidyverse package for creating visualizations (or figures).
 
 Let's work with a smaller data set, for now.
 
@@ -807,14 +798,9 @@ student_mot_vars &lt;- # save object student_mot_vars by...
 
 # Scatter plot
 
+Notice the three parts of all `ggplot2` graphs: a) the data (`student_mot_vars`), b) an `aes()`thetic mapping, and c) a `geom`:
 
-```r
-ggplot(student_mot_vars,
-       aes(x = student_efficacy, y = student_broad_interest)) +
-  geom_point()
-```
-
-![](msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-44-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -828,7 +814,7 @@ ggplot(student_mot_vars,
   geom_smooth(method = "lm")
 ```
 
-![](msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -845,29 +831,14 @@ ggplot(student_mot_vars,
   ylab("Student Broad Interest")
 ```
 
-![](msu-workshop-2019_files/figure-html/unnamed-chunk-47-1.png)&lt;!-- --&gt;
-
----
-
-# Scatter plot with a regression line and some cleaning up
-
-
-```r
-ggplot(student_mot_vars,
-       aes(x = student_efficacy, y = student_broad_interest)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  theme_bw() +
-  xlab("Student Efficacy") +
-  ylab("Student Broad Interest")
-```
-
-![](msu-workshop-2019_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 class: inverse, center, middle
 # Demo doc (part 2)
+
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
 
 ---
 
@@ -879,48 +850,154 @@ class: inverse, center, middle
 
 # Linear models
 
+The `lm()` function is a very helpful general purpose function for linear models. We'll use the `student_mot_vars` data frame we created earlier.
+
+
+```r
+lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
+```
+
+```
+## 
+## Call:
+## lm(formula = student_epistemic_beliefs ~ student_broad_interest, 
+##     data = student_mot_vars)
+## 
+## Coefficients:
+##            (Intercept)  student_broad_interest  
+##                 0.2407                  0.2401
+```
+
+---
+
+# Linear models
+
+Let's save the results back to an object, `m1`.
+
+
+```r
+m1 &lt;- lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
+```
+
+---
+
+# Linear models
+
+We can then run a summary on the output.
+
+
+```r
+summary(m1)
+```
+
+```
+## 
+## Call:
+## lm(formula = student_epistemic_beliefs ~ student_broad_interest, 
+##     data = student_mot_vars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.6197 -0.5614 -0.1755  0.5917  2.5144 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)             0.24066    0.01390   17.31   &lt;2e-16 ***
+## student_broad_interest  0.24015    0.01423   16.88   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.013 on 5323 degrees of freedom
+##   (387 observations deleted due to missingness)
+## Multiple R-squared:  0.0508,	Adjusted R-squared:  0.05062 
+## F-statistic: 284.9 on 1 and 5323 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+
+# Linear models
+
+You can then build up a more complex model, i.e.:
+
+
+```r
+m2 &lt;- lm(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy, data = student_mot_vars)
+```
+
+You can then run `summary()` to view the results.
+
 ---
 
 # Multi-level models
 
----
 
-# Latent variable models
+```r
+library(lme4)
+m2_mlm &lt;- lmer(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy + (1|teacher_id), data = student_mot_vars)
+m2_mlm
+```
 
+```
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: 
+## student_epistemic_beliefs ~ student_broad_interest + student_joy +  
+##     student_broad_interest:student_joy + (1 | teacher_id)
+##    Data: student_mot_vars
+## REML criterion at convergence: 14853.02
+## Random effects:
+##  Groups     Name        Std.Dev.
+##  teacher_id (Intercept) 0.1839  
+##  Residual               0.9648  
+## Number of obs: 5315, groups:  teacher_id, 176
+## Fixed Effects:
+##                        (Intercept)              student_broad_interest  
+##                            0.16608                             0.07491  
+##                        student_joy  student_broad_interest:student_joy  
+##                            0.27409                             0.01991
+```
 ---
 
 class: inverse, center, middle
 # Demo doc (part 3)
 
+*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
 ---
+
 
 class: inverse, center, middle
-# Questions, other
-
----
-
-# R Markdown
-
----
-
-# APA Tables
-
----
-
-# Papaja
-
----
-
-# Redoc
-
-
----
-
 # Learning and doing more with R
 
 ---
 
-# Following up
+# Resources
+
+  - [Doing data science with R](https://r4ds.had.co.nz/) by Wickham and
+    Grolemund (2017)
+  - [Big magic with R: Creating learning beyond
+    fear](https://speakerdeck.com/apreshill/big-magic-with-r-creative-learning-beyond-fear)
+    by Hill (2017)
+  - [Data science in education](https://github.com/data-edu/data-science-in-education)
+
+---
+
+# Courses
+
+  - [\#r4ds](https://medium.com/@kierisi/r4ds-the-next-iteration-d51e0a1b0b82)
+    (see a talk at rstudio::conf()
+    [here](https://resources.rstudio.com/rstudio-conf-2019/r4ds-online-learning-community-improvements-to-self-taught-data-science-and-the-critical-need-for-diversity-equity-and-inclusion-in-data-science-education)
+    by Maegan (2019))
+  - [Data science for social scientists](http://datascience.tntlab.org/) by
+    Landers (2019)
+  - [University of Oregon Data Science Specialization for the College of
+    Education](https://github.com/uo-datasci-specialization) by Anderson (2019)
+
+---
+
+
+class: inverse, center, middle
+# Questions?
+
+The repository for this workshop is [here](https://github.com/jrosen48/MSU-workshop-2019).
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
