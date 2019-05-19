@@ -37,6 +37,9 @@ Let's select only a few variables.
 
 ```{r}
 gss_cat %>% 
+  select(year, tvhours)
+
+gss_cat %>% 
   select(year, marital, tvhours)
 ```
 
@@ -53,7 +56,7 @@ gss_cat %>%
 
 ```{r}
 gss_cat %>% 
-  filter(age > 30)
+  filter(age > 60)
 ```
 
 **Try it out!**
@@ -73,14 +76,23 @@ Let's create a new variable for those 60 years of age or older.
 
 ```{r}
 gss_cat %>% 
-  mutate(potential_senior = if_else(age >= 60, TRUE, FALSE))
+  mutate(potential_senior = if_else(age >= 63.5, 1, 0),
+         super_senior = if_else(potential_senior == 1 & tvhours < 2, 1, 0)) %>% 
+  count(potential_senior, super_senior)
 ```
 
 Let's save the results back to `gss_cat` and make sure that it worked.
 
 ```{r}
 gss_cat <- gss_cat %>% 
-  mutate(potential_senior = if_else(age >= 60, TRUE, FALSE))
+  mutate(potential_senior = ifelse(age >= 63.5, TRUE, FALSE))
+```
+
+Adding another variable for folks who are middle-aged.
+
+```{r}
+gss_cat <- gss_cat %>% 
+  mutate(middle_aged = ifelse(age >= 30 & age <= 40, "yes", "no"))
 ```
 
 **Try it out!**
@@ -163,7 +175,7 @@ ggplot(gss_cat, aes(x = age, y = tvhours)) +
 Let's run a regression.
 
 ```{r}
-m1 <- lm(tvhours ~ age, summary = gss_ct)
+m1 <- lm(tvhours ~ age, data = gss_cat)
 summary(m1)
 ```
 
@@ -172,6 +184,6 @@ summary(m1)
 Can you add another variable to the model? If you need to check what variables are in `gss_cat`, print that object to the console.
 
 ```{r}
-m2 <- lm(tvhours ~ age + , summary = gss_ct)
+m2 <- lm(tvhours ~ age + , data = gss_cat)
 summary(m1)
 ```

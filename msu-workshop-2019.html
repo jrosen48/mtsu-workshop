@@ -1,24 +1,28 @@
----
-title: "Won’t you be my neighboR?"
-subtitle: "An introduction to R for data science in education"
-author: "Joshua Rosenberg and Emily Bovee"
-date: "2018-05-16"
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, custom.css]
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Won’t you be my neighboR?</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Joshua Rosenberg and Emily Bovee" />
+    <meta name="date" content="2018-05-16" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Won’t you be my neighboR?
+## An introduction to R for data science in education
+### Joshua Rosenberg and Emily Bovee
+### 2018-05-16
+
 ---
 
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
 
-library(knitr)
-library(tidyverse)
-```
+
 
 # #whoami1
 
@@ -31,9 +35,7 @@ library(tidyverse)
   * Data science education
 ]
 
-```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
-include_graphics("img/kr-joro.jpg")
-```
+&lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -48,9 +50,7 @@ include_graphics("img/kr-joro.jpg")
   * Data science education 
 ]
 
-```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
-include_graphics("img/ebv.jpg")
-```
+&lt;img src="img/ebv.jpg" width="350px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -126,7 +126,8 @@ Names should be short and easy-to-remember but also informative.
 
 To download a package, you must call `install.packages()`:
 
-```{r, eval = FALSE}
+
+```r
 install.packages("dplyr")
 ```
 
@@ -140,14 +141,15 @@ Usually, writing code is a bit quicker, but using the interface can be very usef
 
 *After* the package is installed, it must be loaded into your R Studio session using `library()`:
 
-```{r}
+
+```r
 library(dplyr)
 ```
 
 We only have to install a package once, but to use it, we have to load it each time we start a new R session.
 
-> A package is a like a book, a library is like a library; you use library() to check a package out of the library
-> - Hadley Wickham, Chief Scientist, R Studio
+&gt; A package is a like a book, a library is like a library; you use library() to check a package out of the library
+&gt; - Hadley Wickham, Chief Scientist, R Studio
 
 ---
 
@@ -157,13 +159,15 @@ Vignettes are long-form documentation (and tutorials) that can provide a helpful
 
 Run `vignette()` in order to view *all* of the vignettes available for a package:
 
-```{r, eval = FALSE}
+
+```r
 vignette(package = "dplyr")
 ```
 
 Then, you can load a specific vignette.
 
-```{r, eval = FALSE}
+
+```r
 vignette("dplyr", package = "dplyr")
 ```
 
@@ -174,18 +178,29 @@ These are also available through CRAN (i.e., https://cran.r-project.org/web/pack
 
 If you know the specific function that you want to look up, you can run this in the R Studio console:
 
-```{r, eval = FALSE}
+
+```r
 ?dplyr::filter
 ```
 
 Once you know what you want to do with the function, you can run it in your code:
 
-```{r}
-dat <- # example data frame
+
+```r
+dat &lt;- # example data frame
   tibble(letter = c("A", "A", "A", "B", "B"),
          number = c(1L, 2L, 3L, 4L, 5L))
 
 filter(dat, letter == "A")
+```
+
+```
+## # A tibble: 3 x 2
+##   letter number
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 A           1
+## 2 A           2
+## 3 A           3
 ```
 
 ---
@@ -194,9 +209,7 @@ filter(dat, letter == "A")
 
 By default, R Studio saves all of the objects in your environment. In general, this is not ideal, because it means that you may have taken steps interactively that are not documented your code.
 
-```{r, out.width = "425px", echo= FALSE, fig.align = "center"}
-include_graphics("img/save-workspace-reminder.jpg")
-```
+&lt;img src="img/save-workspace-reminder.jpg" width="425px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -208,11 +221,13 @@ The packages contained in the Tidyverse provide useful functions that augment ba
 
 You can installing and load the complete tidyverse with:
 
-```{r, eval = FALSE}
+
+```r
 install.packages("tidyverse")
 ```
 
-```{r, message = FALSE}
+
+```r
 library(tidyverse)
 ```
 
@@ -227,36 +242,74 @@ class: inverse, center, middle
 
 - Data Frame
 
-````{r}
+
+```r
 data.frame(var1 = c("a", "b", "c"),
            var2 = c(4, 2, 5))
 ```
 
+```
+##   var1 var2
+## 1    a    4
+## 2    b    2
+## 3    c    5
+```
+
 - Tibble
 
-```{r}
+
+```r
 library(tidyverse)
 tibble(var1 = c("a", "b", "c"),
        var2 = c(4, 2, 5))
+```
+
+```
+## # A tibble: 3 x 2
+##   var1   var2
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a         4
+## 2 b         2
+## 3 c         5
 ```
 
 ---
 
 # Data structures
 
-```{r}
+
+```r
 vec1 = c("a", "b", "c")
 vec1 
 ```
 
-```{r}
+```
+## [1] "a" "b" "c"
+```
+
+
+```r
 vec2 = c(4, 2, 5)
 vec2
 ```
 
-```{r}
+```
+## [1] 4 2 5
+```
+
+
+```r
 tibble(var1 = vec1,
        var2 = vec2)
+```
+
+```
+## # A tibble: 3 x 2
+##   var1   var2
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a         4
+## 2 b         2
+## 3 c         5
 ```
 
 ---
@@ -265,12 +318,29 @@ tibble(var1 = vec1,
 
 - `ifelse()`
 
-```{r}
-vec1 <- runif(10) # generates random number between 0 and 1
-d1 <- tibble(var1 = vec1)
 
-d1 %>% 
-  mutate(var2 = ifelse(var1 >= .5, "greater", "lesser"))
+```r
+vec1 &lt;- runif(10) # generates random number between 0 and 1
+d1 &lt;- tibble(var1 = vec1)
+
+d1 %&gt;% 
+  mutate(var2 = ifelse(var1 &gt;= .5, "greater", "lesser"))
+```
+
+```
+## # A tibble: 10 x 2
+##      var1 var2   
+##     &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.873  greater
+##  2 0.0567 lesser 
+##  3 0.637  greater
+##  4 0.0902 lesser 
+##  5 0.485  lesser 
+##  6 0.988  greater
+##  7 0.900  greater
+##  8 0.990  greater
+##  9 0.518  greater
+## 10 0.649  greater
 ```
 
 ---
@@ -279,14 +349,31 @@ d1 %>%
 
 - `dplyr::case_when()`
 
-```{r}
-d1 %>% 
+
+```r
+d1 %&gt;% 
   mutate(var2 = case_when(
-    var1 >= .75 ~ "a lot",
-    var1 >= .5 & var1 < .75 ~ "greater",
-    var1 >= .25 & var1 < .5  ~ "lesser",
-    var1 < .25 ~ "very little" 
+    var1 &gt;= .75 ~ "a lot",
+    var1 &gt;= .5 &amp; var1 &lt; .75 ~ "greater",
+    var1 &gt;= .25 &amp; var1 &lt; .5  ~ "lesser",
+    var1 &lt; .25 ~ "very little" 
   ))
+```
+
+```
+## # A tibble: 10 x 2
+##      var1 var2       
+##     &lt;dbl&gt; &lt;chr&gt;      
+##  1 0.873  a lot      
+##  2 0.0567 very little
+##  3 0.637  greater    
+##  4 0.0902 very little
+##  5 0.485  lesser     
+##  6 0.988  a lot      
+##  7 0.900  a lot      
+##  8 0.990  a lot      
+##  9 0.518  greater    
+## 10 0.649  greater
 ```
 
 ---
@@ -298,11 +385,12 @@ This is what it resolves to (it's a CSV file): `https://raw.githubusercontent.co
 
 This chunk of code will save that file to a data directory in our working environment.
 
-```{r, eval = FALSE}
-student_responses_url <-
+
+```r
+student_responses_url &lt;-
   "https://goo.gl/bUeMhV"
 
-student_responses_file_name <-
+student_responses_file_name &lt;-
   paste0(getwd(), "/data/student-responses-data.csv")
 
 download.file(
@@ -316,8 +404,9 @@ download.file(
 
 1. The *character string* `"https://goo.gl/wPmujv"` is being saved to an *object* called `student_responses_url`.
 
-```{r, eval = FALSE}
-student_responses_url <-
+
+```r
+student_responses_url &lt;-
   "https://goo.gl/bUeMhV"
 ```
 
@@ -327,8 +416,9 @@ student_responses_url <-
 
 2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `str_c`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
 
-```{r, eval = FALSE}
-student_responses_file_name <-
+
+```r
+student_responses_file_name &lt;-
   str_c(getwd(), "./data/student-responses-data.csv")
 ```
 
@@ -342,7 +432,8 @@ In short, the `download.file()` function needs to know
 - where the file is coming from (which you tell it through the `url`) argument and
 - where the file will be saved (which you tell it through the `destfile` argument).
 
-```{r, eval = FALSE}
+
+```r
 download.file(
   url = student_responses_url,
   destfile = student_responses_file_name)
@@ -353,21 +444,23 @@ class: inverse, center, middle
 # Processing Data
 ---
 
-# The pipe: %>% 
+# The pipe: %&gt;% 
 
 First, let's load the data we downloaded in the last step.
 
-```{r, message = FALSE}
-student_responses <- read_csv("data/student-responses-data.csv")
+
+```r
+student_responses &lt;- read_csv("data/student-responses-data.csv")
 ```
 
-We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%>%`. It lets you *compose* functions. It does this by passing the output of one function to the next.
+We're also going to introduce a powerful, unusual *operator* in R, the pipe. The pipe is this symbol: `%&gt;%`. It lets you *compose* functions. It does this by passing the output of one function to the next.
 
 Select reduces the number of *columns* of a dataset.
 
-```{r, eval = FALSE}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
   select(SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
 
 student_mot_vars
@@ -375,8 +468,9 @@ student_mot_vars
 
 Also, check out the helper functions: `contains()`, `starts_with()`, and `ends_with()`, i.e.:
 
-```{r, eval = FALSE}
-student_responses %>% 
+
+```r
+student_responses %&gt;% 
   select(contains("sci"))
 ```
 
@@ -386,9 +480,10 @@ student_responses %>%
 
 Note that we saved the output from the `select()` function to `student_mot_vars` but we could also save it back to `student_responses`, which would simply overwrite the original data frame (the following code is not run here):
 
-```{r, eval = FALSE}
-student_responses <- # save object student_responses by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_responses &lt;- # save object student_responses by...
+  student_responses %&gt;% # using dataframe student_responses
   select(student_responses, SCIEEFF, JOYSCIE, INTBRSCI, EPIST, INSTSCIE) # and selecting only these five variables
 ```
 
@@ -398,8 +493,9 @@ student_responses <- # save object student_responses by...
 
 We can also rename the variables at the same time we select them. Let's save the results to `student_mot_vars`.
 
-```{r}
-student_mot_vars <- student_responses %>% 
+
+```r
+student_mot_vars &lt;- student_responses %&gt;% 
   select(student_efficacy = SCIEEFF,
          student_joy = JOYSCIE, 
          student_broad_interest = INTBRSCI,
@@ -407,8 +503,18 @@ student_mot_vars <- student_responses %>%
          student_instrumental_motivation = INSTSCIE,
   )
 
-student_mot_vars %>% 
+student_mot_vars %&gt;% 
   head(3)
+```
+
+```
+## # A tibble: 3 x 5
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1            3.28       2.16              1.73             2.16 
+## 2           -0.668      0.509             0.491           -0.501
+## 3           -1.62       0.0992           -0.638           -0.193
+## # … with 1 more variable: student_instrumental_motivation &lt;dbl&gt;
 ```
 
 ---
@@ -421,15 +527,27 @@ What goes *before* the equals sign is the name of the new variable.
 
 What goes after are the instructions.
 
-```{r}
-student_responses %>% 
+
+```r
+student_responses %&gt;% 
   select(student_efficacy = SCIEEFF, 
          student_joy = JOYSCIE, 
          student_broad_interest = INTBRSCI, 
          student_epistemic_beliefs = EPIST,
-         student_instrumental_motivation = INSTSCIE) %>% 
-  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %>% 
+         student_instrumental_motivation = INSTSCIE) %&gt;% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %&gt;% 
   head(3)
+```
+
+```
+## # A tibble: 3 x 6
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1            3.28       2.16              1.73             2.16 
+## 2           -0.668      0.509             0.491           -0.501
+## 3           -1.62       0.0992           -0.638           -0.193
+## # … with 2 more variables: student_instrumental_motivation &lt;dbl&gt;,
+## #   student_joy_interest &lt;dbl&gt;
 ```
 
 ---
@@ -438,16 +556,28 @@ student_responses %>%
 
 Filter takes *logical statements* (statements that can evalute to true or false) to select a number of *rows* from a dataset.
 
-```{r}
-student_responses %>% 
+
+```r
+student_responses %&gt;% 
   select(student_efficacy = SCIEEFF, 
          student_joy = JOYSCIE, 
          student_broad_interest = INTBRSCI, 
          student_epistemic_beliefs = EPIST,
-         student_instrumental_motivation = INSTSCIE) %>% 
-  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %>% 
-  filter(student_joy_interest > mean(student_joy_interest, na.rm = TRUE)) %>% 
+         student_instrumental_motivation = INSTSCIE) %&gt;% 
+  mutate(student_joy_interest = (student_joy + student_broad_interest) / 2) %&gt;% 
+  filter(student_joy_interest &gt; mean(student_joy_interest, na.rm = TRUE)) %&gt;% 
   head(3)
+```
+
+```
+## # A tibble: 3 x 6
+##   student_efficacy student_joy student_broad_i… student_epistem…
+##              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1           3.28         2.16             1.73             2.16 
+## 2          -0.668        0.509            0.491           -0.501
+## 3          -0.0378       1.67             0.332            2.16 
+## # … with 2 more variables: student_instrumental_motivation &lt;dbl&gt;,
+## #   student_joy_interest &lt;dbl&gt;
 ```
 
 ---
@@ -460,14 +590,24 @@ The `group_by()` and `summarize()` functions are especially helpful for this pur
 
 Let's find the mean and standard deviation (and counts) of student broad interest by teacher.
 
-```{r}
-student_responses %>% 
-  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %>% 
-  group_by(teacher_id) %>% 
+
+```r
+student_responses %&gt;% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %&gt;% 
+  group_by(teacher_id) %&gt;% 
   summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
             student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
-            n = n()) %>% 
+            n = n()) %&gt;% 
   head(3)
+```
+
+```
+## # A tibble: 3 x 4
+##   teacher_id student_broad_interest_mean student_broad_interest_sd     n
+##   &lt;chr&gt;                            &lt;dbl&gt;                     &lt;dbl&gt; &lt;int&gt;
+## 1 00001                          -0.157                      0.846    36
+## 2 00003                          -0.136                      1.08     31
+## 3 00004                          -0.0430                     1.26     39
 ```
 
 ---
@@ -480,15 +620,25 @@ Finally, let's arrange the table by the number of students in each class.
 
 `desc()` tells `arrange()` to sort in descending order.
 
-```{r}
-student_responses %>% 
-  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %>% 
-  group_by(teacher_id) %>% 
+
+```r
+student_responses %&gt;% 
+  select(student_broad_interest = INTBRSCI, teacher_id = SCHID) %&gt;% 
+  group_by(teacher_id) %&gt;% 
   summarize(student_broad_interest_mean = mean(student_broad_interest, na.rm = TRUE),
             student_broad_interest_sd = sd(student_broad_interest, na.rm = TRUE),
-            n = n()) %>% 
-  arrange(desc(n)) %>% 
+            n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
   head(3)
+```
+
+```
+## # A tibble: 3 x 4
+##   teacher_id student_broad_interest_mean student_broad_interest_sd     n
+##   &lt;chr&gt;                            &lt;dbl&gt;                     &lt;dbl&gt; &lt;int&gt;
+## 1 00107                           0.204                      0.786    42
+## 2 00117                           0.204                      0.893    42
+## 3 00131                           0.0349                     0.870    41
 ```
 
 ---
@@ -497,20 +647,29 @@ student_responses %>%
 
 Sometimes, we simply want to count the number of observations associated with each group.
 
-```{r, eval = FALSE}
-student_responses %>% 
-  select(teacher_id = SCHID) %>% 
+
+```r
+student_responses %&gt;% 
+  select(teacher_id = SCHID) %&gt;% 
   count(teacher_id)
 ```
 
 We could then use this as the basis of *other* summary statistics.
 
-```{r}
-student_responses %>% 
-  select(teacher_id = SCHID) %>% 
-  count(teacher_id) %>% 
+
+```r
+student_responses %&gt;% 
+  select(teacher_id = SCHID) %&gt;% 
+  count(teacher_id) %&gt;% 
   summarize(n_mean = mean(n),
             n_sd = sd(n))
+```
+
+```
+## # A tibble: 1 x 2
+##   n_mean  n_sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1   32.3  8.61
 ```
 
 On average, there are around 32 (*SD* = 8.61) students in each teachers' class.
@@ -538,19 +697,22 @@ Okay, we're ready to go. The easiest way to read a CSV file is with the function
 
 Again, we'll load (or have loaded, already) the tidyverse library.
 
-```{r, message = F}
+
+```r
 library(tidyverse) # so tidyverse packages can be used for analysis
 ```
 
 Just as a recap of a line that we ran earlier. 
 
-```{r, eval = TRUE, message = FALSE}
-student_responses <- read_csv("data/student-responses-data.csv")
+
+```r
+student_responses &lt;- read_csv("data/student-responses-data.csv")
 ```
 
 Since we loaded the data, we now want to look at it. We can type its name in the function `glimpse()` to print some information on the dataset (this code is not run here).
 
-```{r, eval = FALSE}
+
+```r
 glimpse(student_responses)
 ```
 
@@ -562,28 +724,33 @@ You can also print the name of the object.
 
 ## Loading Excel files
 
-```{r, eval = FALSE}
+
+```r
 install.packages("readxl")
 ```
 
-```{r}
+
+```r
 library(readxl)
 ```
 
-```{r, eval = FALSE}
-my_data <-
+
+```r
+my_data &lt;-
   read_excel("path/to/file.xlsx")
 ```
 
 ## Loading SAV files
 
-```{r, eval = FALSE}
+
+```r
 install.packages("haven")
 ```
 
-```{r, eval = FALSE}
+
+```r
 library(haven)
-my_data <-
+my_data &lt;-
   read_sav("path/to/file.xlsx")
 ```
 
@@ -593,7 +760,8 @@ my_data <-
 
 Using our data frame `student_responses`, we can save it as a CSV (for example) with the following function. The first argument, `student_reponses`, is the name of the object that you want to save. The second argument, `student-responses.csv`, what you want to call the saved dataset.
 
-```{r, eval = FALSE}
+
+```r
 write_csv(student_responses, "student-responses.csv")
 ```
 
@@ -613,9 +781,10 @@ class: inverse, center, middle
 
 Let's work with a smaller data set, for now.
 
-```{r}
-student_mot_vars <- # save object student_mot_vars by...
-  student_responses %>% # using dataframe student_responses
+
+```r
+student_mot_vars &lt;- # save object student_mot_vars by...
+  student_responses %&gt;% # using dataframe student_responses
   select(student_efficacy = SCIEEFF, # selecting variable SCIEEFF and renaming to student_efficiency
          student_joy = JOYSCIE, # selecting variable JOYSCIE and renaming to student_joy
          student_broad_interest = INTBRSCI, # selecting variable INTBRSCI and renaming to student_broad_interest
@@ -631,28 +800,28 @@ student_mot_vars <- # save object student_mot_vars by...
 
 Notice the three parts of all `ggplot2` graphs: a) the data (`student_mot_vars`), b) an `aes()`thetic mapping, and c) a `geom`:
 
-```{r, warning = FALSE, out.width = "450px", echo = FALSE, fig.align = "center"}
-ggplot(student_mot_vars,
-       aes(x = student_efficacy, y = student_broad_interest)) +
-  geom_point()
-```
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-44-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Scatter plot with a regression line
 
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
 
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+
 ---
 
 # Scatter plot with a regression line and some cleaning up
 
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+
+```r
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
@@ -661,6 +830,8 @@ ggplot(student_mot_vars,
   xlab("Student Efficacy") +
   ylab("Student Broad Interest")
 ```
+
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -681,8 +852,20 @@ class: inverse, center, middle
 
 The `lm()` function is a very helpful general purpose function for linear models. We'll use the `student_mot_vars` data frame we created earlier.
 
-```{r}
+
+```r
 lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
+```
+
+```
+## 
+## Call:
+## lm(formula = student_epistemic_beliefs ~ student_broad_interest, 
+##     data = student_mot_vars)
+## 
+## Coefficients:
+##            (Intercept)  student_broad_interest  
+##                 0.2407                  0.2401
 ```
 
 ---
@@ -691,8 +874,9 @@ lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
 
 Let's save the results back to an object, `m1`.
 
-```{r}
-m1 <- lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
+
+```r
+m1 &lt;- lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_vars)
 ```
 
 ---
@@ -701,8 +885,32 @@ m1 <- lm(student_epistemic_beliefs ~ student_broad_interest, data = student_mot_
 
 We can then run a summary on the output.
 
-```{r}
+
+```r
 summary(m1)
+```
+
+```
+## 
+## Call:
+## lm(formula = student_epistemic_beliefs ~ student_broad_interest, 
+##     data = student_mot_vars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.6197 -0.5614 -0.1755  0.5917  2.5144 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)             0.24066    0.01390   17.31   &lt;2e-16 ***
+## student_broad_interest  0.24015    0.01423   16.88   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.013 on 5323 degrees of freedom
+##   (387 observations deleted due to missingness)
+## Multiple R-squared:  0.0508,	Adjusted R-squared:  0.05062 
+## F-statistic: 284.9 on 1 and 5323 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -711,8 +919,9 @@ summary(m1)
 
 You can then build up a more complex model, i.e.:
 
-```{r, eval = FALSE}
-m2 <- lm(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy, data = student_mot_vars)
+
+```r
+m2 &lt;- lm(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy, data = student_mot_vars)
 ```
 
 You can then run `summary()` to view the results.
@@ -721,10 +930,48 @@ You can then run `summary()` to view the results.
 
 # Multi-level models
 
-```{r, eval = TRUE}
+
+```r
 library(lme4)
-m2_mlm <- lmer(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy + (1|teacher_id), data = student_mot_vars)
+```
+
+```
+## Loading required package: Matrix
+```
+
+```
+## 
+## Attaching package: 'Matrix'
+```
+
+```
+## The following object is masked from 'package:tidyr':
+## 
+##     expand
+```
+
+```r
+m2_mlm &lt;- lmer(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy + (1|teacher_id), data = student_mot_vars)
 m2_mlm
+```
+
+```
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: 
+## student_epistemic_beliefs ~ student_broad_interest + student_joy +  
+##     student_broad_interest:student_joy + (1 | teacher_id)
+##    Data: student_mot_vars
+## REML criterion at convergence: 14853.02
+## Random effects:
+##  Groups     Name        Std.Dev.
+##  teacher_id (Intercept) 0.1839  
+##  Residual               0.9648  
+## Number of obs: 5315, groups:  teacher_id, 176
+## Fixed Effects:
+##                        (Intercept)              student_broad_interest  
+##                            0.16608                             0.07491  
+##                        student_joy  student_broad_interest:student_joy  
+##                            0.27409                             0.01991
 ```
 ---
 
@@ -776,3 +1023,51 @@ The repository for this workshop is [here](https://github.com/jrosen48/MSU-works
 
 - [Joshua Rosenberg](mailto:jmrosenberg@utk.edu)
 - [Emily Bovee](mailto:emily.a.bovee@gmail.com)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
