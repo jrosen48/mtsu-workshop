@@ -4,7 +4,7 @@
     <title>Won’t you be my neighboR?</title>
     <meta charset="utf-8">
     <meta name="author" content="Joshua Rosenberg and Emily Bovee" />
-    <meta name="date" content="2019-05-16" />
+    <meta name="date" content="2018-05-16" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 # Won’t you be my neighboR?
 ## An introduction to R for data science in education
 ### Joshua Rosenberg and Emily Bovee
-### 2019-05-16
+### 2018-05-16
 
 ---
 
@@ -104,7 +104,7 @@ To download R Studio:
 
 ## Check that it worked
 
-Open R Studio.  Find the console window and type in `2 + 2`. If what you can guess is returned (hint: it's what you expect!), then R Studio *and* R both work.
+Open R Studio. Find the console window and type in `2 + 2`. If what you can guess is returned (hint: it's what you expect!), then R Studio *and* R both work.
 
 ---
 
@@ -120,7 +120,7 @@ Names should be short and easy-to-remember but also informative.
 
 # Packages
 
-"Packages" are shareable collections of R code that provide functions (i.e., a command to perform a specific task), data and documentation,. Packages increase the functionality of R by improving and expanding on base R (basic R functions). 
+"Packages" are shareable collections of R code that provide functions (i.e., a command to perform a specific task), data, and documentation. Packages increase the functionality of R by improving and expanding on base R (basic R functions). 
 
 ### Installing and Loading Packages
 
@@ -324,23 +324,23 @@ vec1 &lt;- runif(10) # generates random number between 0 and 1
 d1 &lt;- tibble(var1 = vec1)
 
 d1 %&gt;% 
-  mutate(var2 = ifelse(vec1 &gt;= .5, "greater", "lesser"))
+  mutate(var2 = ifelse(var1 &gt;= .5, "greater", "lesser"))
 ```
 
 ```
 ## # A tibble: 10 x 2
-##      var1 var2   
-##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.0171 lesser 
-##  2 0.847  greater
-##  3 0.239  lesser 
-##  4 0.546  greater
-##  5 0.577  greater
-##  6 0.221  lesser 
-##  7 0.425  lesser 
-##  8 0.819  greater
-##  9 0.854  greater
-## 10 0.0299 lesser
+##     var1 var2   
+##    &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.553 greater
+##  2 0.747 greater
+##  3 0.979 greater
+##  4 0.356 lesser 
+##  5 0.394 lesser 
+##  6 0.724 greater
+##  7 0.145 lesser 
+##  8 0.263 lesser 
+##  9 0.120 lesser 
+## 10 0.785 greater
 ```
 
 ---
@@ -354,26 +354,26 @@ d1 %&gt;%
 d1 %&gt;% 
   mutate(var2 = case_when(
     var1 &gt;= .75 ~ "a lot",
-    var1 &gt;= .5 ~ "greater",
-    var1 &lt; .5 ~ "lesser",
-    var1 &lt;= .25 ~ "very little" 
+    var1 &gt;= .5 &amp; var1 &lt; .75 ~ "greater",
+    var1 &gt;= .25 &amp; var1 &lt; .5  ~ "lesser",
+    var1 &lt; .25 ~ "very little" 
   ))
 ```
 
 ```
 ## # A tibble: 10 x 2
-##      var1 var2   
-##     &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.0171 lesser 
-##  2 0.847  a lot  
-##  3 0.239  lesser 
-##  4 0.546  greater
-##  5 0.577  greater
-##  6 0.221  lesser 
-##  7 0.425  lesser 
-##  8 0.819  a lot  
-##  9 0.854  a lot  
-## 10 0.0299 lesser
+##     var1 var2       
+##    &lt;dbl&gt; &lt;chr&gt;      
+##  1 0.553 greater    
+##  2 0.747 greater    
+##  3 0.979 a lot      
+##  4 0.356 lesser     
+##  5 0.394 lesser     
+##  6 0.724 greater    
+##  7 0.145 very little
+##  8 0.263 lesser     
+##  9 0.120 very little
+## 10 0.785 a lot
 ```
 
 ---
@@ -414,7 +414,7 @@ student_responses_url &lt;-
 
 # Step 2
 
-2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `paste0`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
+2. We concatenate the working directory file path to the desired file name for the CSV using a *function* called `str_c`. This is stored in another *object* called `student_reponses_file_name`. This creates a file name with a *file path* in your working directory and it saves the file in the folder that you are working in. 
 
 
 ```r
@@ -933,6 +933,24 @@ You can then run `summary()` to view the results.
 
 ```r
 library(lme4)
+```
+
+```
+## Loading required package: Matrix
+```
+
+```
+## 
+## Attaching package: 'Matrix'
+```
+
+```
+## The following object is masked from 'package:tidyr':
+## 
+##     expand
+```
+
+```r
 m2_mlm &lt;- lmer(student_epistemic_beliefs ~ student_broad_interest + student_joy + student_broad_interest:student_joy + (1|teacher_id), data = student_mot_vars)
 m2_mlm
 ```
@@ -998,6 +1016,13 @@ class: inverse, center, middle
 # Questions?
 
 The repository for this workshop is [here](https://github.com/jrosen48/MSU-workshop-2019).
+
+---
+
+# Contact
+
+- [Joshua Rosenberg](mailto:jmrosenberg@utk.edu)
+- [Emily Bovee](mailto:emily.a.bovee@gmail.com)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
