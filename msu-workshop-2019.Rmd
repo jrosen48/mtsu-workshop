@@ -641,18 +641,16 @@ ggplot(student_mot_vars,
 
 # Scatter plot with a regression line
 
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+```{r, warning = FALSE, out.width = "350px", fig.align = "center"}
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
-
 ---
+# Cleaning up
 
-# Scatter plot with a regression line and some cleaning up
-
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+```{r, warning = FALSE, out.width = "350px", fig.align = "center"}
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
@@ -661,7 +659,6 @@ ggplot(student_mot_vars,
   xlab("Student Efficacy") +
   ylab("Student Broad Interest")
 ```
-
 ---
 
 class: inverse, center, middle
@@ -748,7 +745,8 @@ class: inverse, center, middle
     fear](https://speakerdeck.com/apreshill/big-magic-with-r-creative-learning-beyond-fear)
     by Hill (2017)
   - [Data science in education](https://github.com/data-edu/data-science-in-education)
-
+  - [R Studio Community](https://community.rstudio.com/)
+  
 ---
 
 # Courses
@@ -764,6 +762,49 @@ class: inverse, center, middle
 
 ---
 
+# Useful packages
+
+With one exception, can install via `install.packages(<name-of-package)`, i.e., `install.packages("tidylog").
+
+- tidyverse: tools for data manipulation and processing
+- tidylog: companion to the tidyverse; gives you feedback
+- haven: import and export files for other statistical software
+- apaTables: create APA-style tables in MS Word format
+- devtools: to download packages only available on GitHub
+- psych: general psychological science-related analysis tools
+- skimr: quickly calculate summary statistics for a data frame
+- lavaan: structural equation modeling
+- tipyLPA: latent profile analysis
+- lme4: multi-level modeling (HLM)
+- sjstats: convenient statistical functions
+- poLCA: latent class analysis
+- rmarkdown: reports (PDF, Word, HTML, etc.)
+- papaja: APA-style paper generation (must install from [GitHub](https://github.com/crsh/papaja))
+- blogdown create a website/blog
+- xaringan: create presentations
+- MplusAutomation: Run Mplus via R
+
+---
+
+# People (and a few hashtags) to follow (on Twitter)
+
+- [Jesse Mostipak](https://twitter.com/kierisi)
+- [Alison Hill](https://twitter.com/apreshill)
+- [Hadley Wickham](https://twitter.com/hadleywickham)
+- [Daniel Anderson](https://twitter.com/datalorax_)
+- [Mara Averick](https://twitter.com/dataandme)
+- [Thomas Mock](https://twitter.com/thomas_mock)
+- [Angela Li](https://twitter.com/CivicAngela)
+- [R4DS community](https://twitter.com/R4DScommunity)
+- [#tidytuesday](https://twitter.com/hashtag/TidyTuesday?src=hash)
+- [#rstats](https://twitter.com/hashtag/rstats?src=hash)
+- [David Robinson](https://twitter.com/drob)
+- [Julia Silge](https://twitter.com/juliasilge)
+- [Gabriela de Quieroz](https://twitter.com/gdequeiroz)
+- [Joshua Rosenberg](https://twitter.com/jrosenberg6432)
+- [Emily Bovee](https://twitter.com/ebovee09)
+
+---
 
 class: inverse, center, middle
 # Questions?
