@@ -329,18 +329,18 @@ d1 %&gt;%
 
 ```
 ## # A tibble: 10 x 2
-##     var1 var2   
-##    &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.553 greater
-##  2 0.747 greater
-##  3 0.979 greater
-##  4 0.356 lesser 
-##  5 0.394 lesser 
-##  6 0.724 greater
-##  7 0.145 lesser 
-##  8 0.263 lesser 
-##  9 0.120 lesser 
-## 10 0.785 greater
+##      var1 var2   
+##     &lt;dbl&gt; &lt;chr&gt;  
+##  1 0.254  lesser 
+##  2 0.951  greater
+##  3 0.360  lesser 
+##  4 0.255  lesser 
+##  5 0.0252 lesser 
+##  6 0.825  greater
+##  7 0.826  greater
+##  8 0.251  lesser 
+##  9 0.197  lesser 
+## 10 0.716  greater
 ```
 
 ---
@@ -362,18 +362,18 @@ d1 %&gt;%
 
 ```
 ## # A tibble: 10 x 2
-##     var1 var2       
-##    &lt;dbl&gt; &lt;chr&gt;      
-##  1 0.553 greater    
-##  2 0.747 greater    
-##  3 0.979 a lot      
-##  4 0.356 lesser     
-##  5 0.394 lesser     
-##  6 0.724 greater    
-##  7 0.145 very little
-##  8 0.263 lesser     
-##  9 0.120 very little
-## 10 0.785 a lot
+##      var1 var2       
+##     &lt;dbl&gt; &lt;chr&gt;      
+##  1 0.254  lesser     
+##  2 0.951  a lot      
+##  3 0.360  lesser     
+##  4 0.255  lesser     
+##  5 0.0252 very little
+##  6 0.825  a lot      
+##  7 0.826  a lot      
+##  8 0.251  lesser     
+##  9 0.197  very little
+## 10 0.716  greater
 ```
 
 ---
@@ -814,11 +814,9 @@ ggplot(student_mot_vars,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png" width="450px" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png" width="350px" style="display: block; margin: auto;" /&gt;
 ---
-
-# Scatter plot with a regression line and some cleaning up
+# Cleaning up
 
 
 ```r
@@ -831,8 +829,7 @@ ggplot(student_mot_vars,
   ylab("Student Broad Interest")
 ```
 
-&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png" width="450px" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="msu-workshop-2019_files/figure-html/unnamed-chunk-46-1.png" width="350px" style="display: block; margin: auto;" /&gt;
 ---
 
 class: inverse, center, middle

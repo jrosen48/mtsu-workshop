@@ -641,18 +641,16 @@ ggplot(student_mot_vars,
 
 # Scatter plot with a regression line
 
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+```{r, warning = FALSE, out.width = "350px", fig.align = "center"}
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
-
 ---
+# Cleaning up
 
-# Scatter plot with a regression line and some cleaning up
-
-```{r, warning = FALSE, out.width = "450px", fig.align = "center"}
+```{r, warning = FALSE, out.width = "350px", fig.align = "center"}
 ggplot(student_mot_vars,
        aes(x = student_efficacy, y = student_broad_interest)) +
   geom_point() +
@@ -661,7 +659,6 @@ ggplot(student_mot_vars,
   xlab("Student Efficacy") +
   ylab("Student Broad Interest")
 ```
-
 ---
 
 class: inverse, center, middle
