@@ -16,6 +16,8 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
+# rmarkdown::render("msu-workshop-2019.rmd", output_file = 'index.html')
+
 library(knitr)
 library(tidyverse)
 ```
@@ -801,8 +803,7 @@ With one exception, can install via `install.packages(<name-of-package)`, i.e., 
 - [David Robinson](https://twitter.com/drob)
 - [Julia Silge](https://twitter.com/juliasilge)
 - [Gabriela de Quieroz](https://twitter.com/gdequeiroz)
-- [Joshua Rosenberg](https://twitter.com/jrosenberg6432)
-- [Emily Bovee](https://twitter.com/ebovee09)
+- [Joshua Rosenberg](https://twitter.com/jrosenberg6432) and [Emily Bovee](https://twitter.com/ebovee09) (of course! :)
 
 ---
 

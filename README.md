@@ -25,7 +25,11 @@ To download R Studio:
 
 ## Slides
 
-The (in-development) slides will be hosted here: https://jrosen48.github.io/MSU-workshop-2019/
+The slides are here: https://jrosen48.github.io/MSU-workshop-2019/
+
+## Interactive R Markdown File
+
+`demo-doc.Rmd` is an interactive R Markdown file that accompanies the presentation.
 
 ## Thank you
 
