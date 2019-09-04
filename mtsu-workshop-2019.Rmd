@@ -1,8 +1,8 @@
 ---
-title: "Won’t you be my neighboR?"
-subtitle: "An introduction to R for data science in education"
-author: "Joshua Rosenberg and Emily Bovee"
-date: "2018-05-16"
+title: "An Introduction to Data Science in Education in Education Using R"
+subtitle: ""
+author: "Joshua Rosenberg"
+date: "2019-09-05"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts, custom.css]
@@ -16,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
-# rmarkdown::render("msu-workshop-2019.rmd", output_file = 'index.html')
+# rmarkdown::render("MTSU-workshop.rmd", output_file = 'index.html')
 
 library(knitr)
 library(tidyverse)
@@ -35,23 +35,6 @@ library(tidyverse)
 
 ```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
 include_graphics("img/kr-joro.jpg")
-```
-
----
-
-# #whoami2
-
-.pull-left[
-* Dr. Emily Bovee
-* Director of Educational Development and Assessment: Marquette University School of Dentistry
-* Cat mom
-* Primary areas of interest
-  * Understanding student motivation in higher education and professional education
-  * Data science education 
-]
-
-```{r, out.width = "350px", echo = FALSE, fig.align = "center"}
-include_graphics("img/ebv.jpg")
 ```
 
 ---
@@ -524,7 +507,7 @@ class: inverse, center, middle
 
 *Note. Check out [R Studio Cloud](https://rstudio.cloud/) if you're having any installation trouble!*
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 
 ---
 
@@ -666,7 +649,7 @@ ggplot(student_mot_vars,
 class: inverse, center, middle
 # Demo doc (part 2)
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 
 ---
 
@@ -730,7 +713,7 @@ m2_mlm
 class: inverse, center, middle
 # Demo doc (part 3)
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 ---
 
 
@@ -748,6 +731,7 @@ class: inverse, center, middle
     by Hill (2017)
   - [Data science in education](https://github.com/data-edu/data-science-in-education)
   - [R Studio Community](https://community.rstudio.com/)
+  - [Data Science in Education Using R](https://github.com/data-edu/data-science-in-education)
   
 ---
 
@@ -803,18 +787,23 @@ With one exception, can install via `install.packages(<name-of-package)`, i.e., 
 - [David Robinson](https://twitter.com/drob)
 - [Julia Silge](https://twitter.com/juliasilge)
 - [Gabriela de Quieroz](https://twitter.com/gdequeiroz)
-- [Joshua Rosenberg](https://twitter.com/jrosenberg6432) and [Emily Bovee](https://twitter.com/ebovee09) (of course! :)
+- [Emily Bovee](https://twitter.com/ebovee09)
+- [Joshua Rosenberg](https://twitter.com/jrosenberg6432)
 
 ---
 
 class: inverse, center, middle
 # Questions?
 
-The repository for this workshop is [here](https://github.com/jrosen48/MSU-workshop-2019).
+The repository for this workshop is [here](https://github.com/jrosen48/MTSU-workshop).
 
 ---
 
+# Acknowlegment
+
+This presentation is based on one given with Dr. Emily Bovee: https://github.com/jrosen48/MSU-workshop-2019
+
+---
 # Contact
 
 - [Joshua Rosenberg](mailto:jmrosenberg@utk.edu)
-- [Emily Bovee](mailto:emily.a.bovee@gmail.com)
