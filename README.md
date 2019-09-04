@@ -1,9 +1,9 @@
-# MSU-workshop-2019
+# MTSU-workshop-2019
 
 This is a repository for:
 
-*Won’t you be my neighboR?: An introduction to R for data science in education*
-Thursday, 5/16, 5:30 - 7:30 pm
+*An Introduction to Data Science in Education in Education Using R*
+Thursday, 9/4, 9:30 - 11:30
 
 ## Objectives
 
@@ -31,9 +31,15 @@ The slides are here: https://jrosen48.github.io/MSU-workshop-2019/
 
 `demo-doc.Rmd` is an interactive R Markdown file that accompanies the presentation.
 
+## R Studio Cloud
+
+An R Studio Cloud workspace/environment for the `demo-doc.Rmd` document in this repository is availabile here: https://rstudio.cloud/project/486640
+
+This may be especially helpful if you do not yet have R and R Studio installed on your computer. It does require you to create an account or to use a Google (or GitHub) account to sign-in.
+
 ## Thank you
 
-Thank you to [Emily Bovee](https://github.com/emilybovee) for facilitating the online portion of this workshop.
+Thank you to [Emily Bovee](https://github.com/emilybovee) for developing the workshop this workshop is adapted from: https://github.com/jrosen48/MSU-workshop-2019
 
 ## Acknowledgments
 
