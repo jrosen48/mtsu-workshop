@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Won’t you be my neighboR?</title>
-    <meta charset="utf-8">
-    <meta name="author" content="Joshua Rosenberg and Emily Bovee" />
-    <meta name="date" content="2018-05-16" />
+    <title>An Introduction to Data Science in Education in Education Using R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Joshua Rosenberg" />
+    <meta name="date" content="2019-09-05" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -14,10 +14,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Won’t you be my neighboR?
-## An introduction to R for data science in education
-### Joshua Rosenberg and Emily Bovee
-### 2018-05-16
+# An Introduction to Data Science in Education in Education Using R
+### Joshua Rosenberg
+### 2019-09-05
 
 ---
 
@@ -36,21 +35,6 @@ class: center, middle, inverse, title-slide
 ]
 
 &lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
-
----
-
-# #whoami2
-
-.pull-left[
-* Dr. Emily Bovee
-* Director of Educational Development and Assessment: Marquette University School of Dentistry
-* Cat mom
-* Primary areas of interest
-  * Understanding student motivation in higher education and professional education
-  * Data science education 
-]
-
-&lt;img src="img/ebv.jpg" width="350px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -331,16 +315,16 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##     var1 var2   
 ##    &lt;dbl&gt; &lt;chr&gt;  
-##  1 0.885 greater
-##  2 0.514 greater
-##  3 0.926 greater
-##  4 0.639 greater
-##  5 0.861 greater
-##  6 0.892 greater
-##  7 0.165 lesser 
-##  8 0.171 lesser 
-##  9 0.877 greater
-## 10 0.776 greater
+##  1 0.111 lesser 
+##  2 0.578 greater
+##  3 0.415 lesser 
+##  4 0.906 greater
+##  5 0.518 greater
+##  6 0.684 greater
+##  7 0.435 lesser 
+##  8 0.812 greater
+##  9 0.137 lesser 
+## 10 0.796 greater
 ```
 
 ---
@@ -364,16 +348,16 @@ d1 %&gt;%
 ## # A tibble: 10 x 2
 ##     var1 var2       
 ##    &lt;dbl&gt; &lt;chr&gt;      
-##  1 0.885 a lot      
-##  2 0.514 greater    
-##  3 0.926 a lot      
-##  4 0.639 greater    
-##  5 0.861 a lot      
-##  6 0.892 a lot      
-##  7 0.165 very little
-##  8 0.171 very little
-##  9 0.877 a lot      
-## 10 0.776 a lot
+##  1 0.111 very little
+##  2 0.578 greater    
+##  3 0.415 lesser     
+##  4 0.906 a lot      
+##  5 0.518 greater    
+##  6 0.684 greater    
+##  7 0.435 lesser     
+##  8 0.812 a lot      
+##  9 0.137 very little
+## 10 0.796 a lot
 ```
 
 ---
@@ -681,7 +665,7 @@ class: inverse, center, middle
 
 *Note. Check out [R Studio Cloud](https://rstudio.cloud/) if you're having any installation trouble!*
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 
 ---
 
@@ -800,7 +784,7 @@ student_mot_vars &lt;- # save object student_mot_vars by...
 
 Notice the three parts of all `ggplot2` graphs: a) the data (`student_mot_vars`), b) an `aes()`thetic mapping, and c) a `geom`:
 
-&lt;img src="index_files/figure-html/unnamed-chunk-44-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+&lt;img src="mtsu-workshop-2019_files/figure-html/unnamed-chunk-43-1.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -814,7 +798,7 @@ ggplot(student_mot_vars,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-45-1.png" width="350px" style="display: block; margin: auto;" /&gt;
+&lt;img src="mtsu-workshop-2019_files/figure-html/unnamed-chunk-44-1.png" width="350px" style="display: block; margin: auto;" /&gt;
 ---
 # Cleaning up
 
@@ -829,13 +813,13 @@ ggplot(student_mot_vars,
   ylab("Student Broad Interest")
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" width="350px" style="display: block; margin: auto;" /&gt;
+&lt;img src="mtsu-workshop-2019_files/figure-html/unnamed-chunk-45-1.png" width="350px" style="display: block; margin: auto;" /&gt;
 ---
 
 class: inverse, center, middle
 # Demo doc (part 2)
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 
 ---
 
@@ -975,7 +959,7 @@ m2_mlm
 class: inverse, center, middle
 # Demo doc (part 3)
 
-*The doc is [here](https://github.com/jrosen48/MSU-workshop-2019/blob/master/demo-doc.Rmd) in the repository*
+*The doc is [here](https://github.com/jrosen48/MTSU-workshop/blob/master/demo-doc.Rmd) in the repository*
 ---
 
 
@@ -993,6 +977,7 @@ class: inverse, center, middle
     by Hill (2017)
   - [Data science in education](https://github.com/data-edu/data-science-in-education)
   - [R Studio Community](https://community.rstudio.com/)
+  - [Data Science in Education Using R](https://github.com/data-edu/data-science-in-education)
   
 ---
 
@@ -1048,22 +1033,28 @@ With one exception, can install via `install.packages(&lt;name-of-package)`, i.e
 - [David Robinson](https://twitter.com/drob)
 - [Julia Silge](https://twitter.com/juliasilge)
 - [Gabriela de Quieroz](https://twitter.com/gdequeiroz)
-- [Joshua Rosenberg](https://twitter.com/jrosenberg6432) and [Emily Bovee](https://twitter.com/ebovee09) (of course! :)
+- [Emily Bovee](https://twitter.com/ebovee09)
+- [Joshua Rosenberg](https://twitter.com/jrosenberg6432)
 
 ---
 
 class: inverse, center, middle
 # Questions?
 
-The repository for this workshop is [here](https://github.com/jrosen48/MSU-workshop-2019).
+The repository for this workshop is [here](https://github.com/jrosen48/MTSU-workshop).
 
 ---
 
+# Acknowlegment
+
+This presentation is based on one given with Dr. Emily Bovee: https://github.com/jrosen48/MSU-workshop-2019
+
+---
 # Contact
 
 - [Joshua Rosenberg](mailto:jmrosenberg@utk.edu)
-- [Emily Bovee](mailto:emily.a.bovee@gmail.com)
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
@@ -1073,16 +1064,57 @@ The repository for this workshop is [here](https://github.com/jrosen48/MSU-works
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -1096,7 +1128,8 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
