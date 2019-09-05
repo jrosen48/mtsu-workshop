@@ -25,7 +25,7 @@ To download R Studio:
 
 ## Slides
 
-The slides are here: https://jrosen48.github.io/MTSU-workshop
+The slides are here: https://jrosen48.github.io/mtsu-workshop/
 
 ## Interactive R Markdown File
 
