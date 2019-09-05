@@ -25,7 +25,7 @@ To download R Studio:
 
 ## Slides
 
-The slides are here: https://jrosen48.github.io/MSU-workshop-2019/
+The slides are here: https://jrosen48.github.io/MTSU-workshop
 
 ## Interactive R Markdown File
 
@@ -39,7 +39,8 @@ This may be especially helpful if you do not yet have R and R Studio installed o
 
 ## Thank you
 
-Thank you to [Emily Bovee](https://github.com/emilybovee) for developing the workshop this workshop is adapted from: https://github.com/jrosen48/MSU-workshop-2019
+Thank you to [Emily Bovee](https://github.com/emilybovee) for developing the workshop this workshop is adapted from: https://github.com/jrosen48/MTSU-workshop
+
 
 ## Acknowledgments
 
